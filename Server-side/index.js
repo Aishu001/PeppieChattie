@@ -17,9 +17,8 @@ dataBaseConnection()
 app.use(bodyParser.json())
 app.use(cors());
 
-
-
-
+//  set-up the various router 
+app.use('/user')
 
 // listen the server
 app.listen(PORT , () => {
