@@ -4,6 +4,7 @@ import cors from 'cors';
 import 'dotenv/config'
 import bodyParser  from 'body-parser';
 import { dataBaseConnection } from './dataBase.js';
+import { userRouter } from './routes/user.js';
 
 //  server set-up
 const app = express()
@@ -18,7 +19,7 @@ app.use(bodyParser.json())
 app.use(cors());
 
 //  set-up the various router 
-app.use('/user')
+app.use('/user',userRouter)
 
 // listen the server
 app.listen(PORT , () => {
