@@ -20,6 +20,7 @@ app.use(cors());
 
 //  set-up the various router 
 app.use('/user',userRouter)
+app.use('/chat' )
 
 // listen the server
 app.listen(PORT , () => {

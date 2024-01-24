@@ -7,6 +7,7 @@ const router = express.Router()
 
 router.post('/signup', async (req, res) => {
     try {
+        
         // Check if a user with the same email exists
         const checkUserExist = await checkIfEmailExist(req);
         if (checkUserExist) {
