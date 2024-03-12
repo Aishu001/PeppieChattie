@@ -2,6 +2,7 @@ import express from 'express';
 import bcrypt from 'bcrypt';
 import User from '../models/user.js';
 import { checkIfEmailExist , generateToken } from '../controller/user.js';
+import { searchUser } from '../controller/searchUser.js';
 
 const router = express.Router()
 
@@ -85,5 +86,8 @@ router.post('/login', async (req, res) => {
         res.status(500).send('Error in code');
     }
 });
+
+// search user 
+router.route('/search').get(searchUser)
 
 export const userRouter = router;
