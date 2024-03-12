@@ -9,4 +9,4 @@ router.route("/sendMessage").post( );
 
 
 // this is for fetching all message for a specific chat
-router.route("/fetchMessage").post();sessionSdd
+router.route("/fetchMessage:chatId").post();
