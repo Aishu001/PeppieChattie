@@ -1,8 +1,8 @@
 import express from 'express';
-import { createChat } from '../controller/chat';
+import { createChat, getChatsParticular } from '../controller/chat';
 
 
 const router = express.Router()
 
 router.route("/createChat").post(createChat);
-router.route("/fetchChats").post();
+router.route("/fetchChats").post(getChatsParticular);
