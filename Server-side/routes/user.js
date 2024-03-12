@@ -13,20 +13,27 @@ router.post('/signup', async (req, res) => {
         if (checkUserExist) {
             return res.status(409).send('Email already exists');
         }
+        if (password !== req.body.confimPassword) {
+            return res.status(409).send('Incorrect password');
+        }
+
+        const profilePictureboy = `https://avatar.iran.liara.run/public/boy?username=${req.body.gender}`
+        const profilePictureGirl = `https://avatar.iran.liara.run/public/boy?username=${req.body.gender}`
         // Hash the password
 const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
 // Create a new user
 const newUser = new User({
     ...req.body,
-    password: hashedPassword
+    password: hashedPassword,
+    profileImageUrl : gender = male ? profilePictureboy : profilePictureGirl
 });
 
 // Save the user to the database
 await newUser.save();
 
         // Generate a token
-        const token = generateToken(newUser._id);
+        const token = generateToken(newUser._id , res);
         res.status(201).json({
             message: 'User registered successfully',
             token: token
@@ -70,7 +77,7 @@ router.post('/login', async (req, res) => {
         }
 
         // generate the token
-        const token = generateToken(isUser._id);
+        const token = generateToken(isUser._id ,res);
 
         res.status(200).json({ message: "Successfully Logged In", token: token });
     } catch (error) {
