@@ -38,3 +38,28 @@ try {
 
 
 }
+
+
+export const getChatsParticular = async(req , res) => {
+    try{
+        Chat.find({
+            user : {
+                $elemMatch : {$eq : req.user._id}
+     } })
+     .populate('user','-password')
+     .sort({updatedAt:-1})
+     if (!chats) {
+        return res.status(404).json({ error: "Chats not found." });
+    }
+
+    return res.status(200).json(chats);
+
+
+    }
+   catch (error) {
+            console.error(error);
+            return res.status(500).json({ error: "Internal Server Error" });
+        }
+    
+    
+}
