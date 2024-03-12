@@ -1,4 +1,5 @@
 import { Chat } from "../models/chat";
+import User from "../models/user";
 
 export const createChat = async(req , res) => {
     const  {userId } = req.body
@@ -37,7 +38,7 @@ try {
 }
 
 
-}
+} 
 
 
 export const getChatsParticular = async(req , res) => {
@@ -48,11 +49,17 @@ export const getChatsParticular = async(req , res) => {
      } })
      .populate('user','-password')
      .sort({updatedAt:-1})
-     if (!chats) {
-        return res.status(404).json({ error: "Chats not found." });
-    }
+     .then (async (results) => {
+results = await User.populate(results,{
+path: "latestMessage.sender",
+select: "name pic email", 
+});
 
-    return res.status(200).json(chats);
+res. status(200). send(results);
+     })
+    
+
+
 
 
     }
