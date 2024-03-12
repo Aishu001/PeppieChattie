@@ -4,18 +4,18 @@ const chatListSchema = new mongoose.Schema({
     chatName:{type:String,trim:true},
     users:[{
         type:mongoose.Schema.Types.ObjectId,
-        ref:"User",
+        ref:"user",
     }
 ],
 latestMessage : {
     type : mongoose.Schema.Types.ObjectId,
-    ref:"Message",
+    ref:"message",
 }
 },{
      timestamps: true
 
 })
 
-const Chat = mongoose.model("Chat" , chatListSchema)
+const Chat = mongoose.model("chat" , chatListSchema)
 
 export {Chat}
