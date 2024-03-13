@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt';
 import User from '../models/user.js';
 import { checkIfEmailExist , generateToken } from '../controller/user.js';
 import { searchUser } from '../controller/searchUser.js';
+import authenticateUser from '../middleware/athorzMiddleware.js';
 
 const router = express.Router()
 
@@ -89,6 +90,6 @@ router.post('/login', async (req, res) => {
 });
 
 // search user 
-router.route('/search').get(searchUser)
+router.route('/search').get(authenticateUser,searchUser)
 
 export const userRouter = router;
