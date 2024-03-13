@@ -4,13 +4,14 @@ const authenticateUser = (req, res, next) => {
     // Check for Authorization header
     const authHeader = req.headers['authorization'];
     console.log('Authorization Header:', authHeader); // Log the authorization header
-    const token = authHeader && authHeader.split(' ')[1];
-    console.log('Extracted Token:', token); // Log the extracted token
-
-    if (!token) {
-        console.log('Unauthorized: Token missing');
+    
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        console.log('Unauthorized: Token missing or malformed');
         return res.status(401).json({ message: 'Unauthorized' });
     }
+
+    const token = authHeader.substring(7); // Remove the 'Bearer ' prefix
+    console.log('Extracted Token:', token); // Log the extracted token
 
     jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
         if (err) {
@@ -21,5 +22,6 @@ const authenticateUser = (req, res, next) => {
         next();
     });
 };
+
 
 export default authenticateUser;
