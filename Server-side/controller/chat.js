@@ -1,5 +1,5 @@
-import { Chat } from "../models/chat";
-import User from "../models/user";
+import { Chat } from "../models/chat.js";
+import User from "../models/user.js";
 
 export const createChat = async(req , res) => {
     const  {userId } = req.body
