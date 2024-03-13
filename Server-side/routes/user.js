@@ -9,12 +9,13 @@ const router = express.Router()
 router.post('/signup', async (req, res) => {
     try {
         
+        const {password }  = req.body
         // Check if a user with the same email exists
         const checkUserExist = await checkIfEmailExist(req);
         if (checkUserExist) {
             return res.status(409).send('Email already exists');
         }
-        if (password !== req.body.confimPassword) {
+        if (password !== req.body.confirmPassword) {
             return res.status(409).send('Incorrect password');
         }
 
@@ -27,7 +28,7 @@ const hashedPassword = await bcrypt.hash(req.body.password, 10);
 const newUser = new User({
     ...req.body,
     password: hashedPassword,
-    profileImageUrl : gender = male ? profilePictureboy : profilePictureGirl
+    profileImageUrl : req.body.gender = 'male' ? profilePictureboy : profilePictureGirl
 });
 
 // Save the user to the database
