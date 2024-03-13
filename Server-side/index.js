@@ -5,6 +5,7 @@ import 'dotenv/config'
 import bodyParser  from 'body-parser';
 import { dataBaseConnection } from './dataBase.js';
 import { userRouter } from './routes/user.js';
+import { chatRouter } from './routes/chat.js';
 
 //  server set-up
 const app = express()
@@ -20,7 +21,7 @@ app.use(cors());
 
 //  set-up the various router 
 app.use('/user',userRouter)
-// app.use('/chat' )
+app.use('/chat',chatRouter )
 
 // listen the server
 app.listen(PORT , () => {

@@ -1,4 +1,4 @@
-import mongoose, { models } from "mongoose";
+import mongoose from "mongoose";
 
 const chatListSchema = new mongoose.Schema({
     chatName:{type:String,trim:true},

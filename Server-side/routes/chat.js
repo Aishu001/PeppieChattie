@@ -6,3 +6,7 @@ const router = express.Router()
 
 router.route("/createChat").post(createChat);
 router.route("/fetchChats").post(getChatsParticular);
+
+
+
+export const chatRouter = router;
