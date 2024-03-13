@@ -1,20 +1,16 @@
 import User from "../models/user.js"
-export const searchUser = async (userId, req, res) => {
+export const searchUser = async (req, res) => {
     try {
-        // Check if userId is provided
-        if (!userId) {
-            throw new Error("User ID not provided.");
-        }
-
+        // Check if req.query.search is defined
         const keyword = req.query.search ? {
             $or: [
-                { name: { $regex: req.query.search, $options: "i" } }
+                { fullName: { $regex: req.query.search, $options: "i" } }
             ]
         } : {};
 
         const user = await User.findOne({
             ...keyword,
-            _id: { $ne: userId }
+            _id: { $ne: req.user._id } // Assuming req.user._id is available for logged-in users
         });
 
         // Handle case when user is not found
@@ -30,6 +26,38 @@ export const searchUser = async (userId, req, res) => {
         return res.status(500).json({ message: "Internal server error." });
     }
 };
+
+// export const searchUser = async (userId, req, res) => {
+//     try {
+//         // Check if userId is provided
+//         if (!userId) {
+//             throw new Error("User ID not provided.");
+//         }
+
+//         const keyword = req.query.search ? {
+//             $or: [
+//                 { name: { $regex: req.query.search, $options: "i" } }
+//             ]
+//         } : {};
+
+//         const user = await User.findOne({
+//             ...keyword,
+//             _id: { $ne: userId }
+//         });
+
+//         // Handle case when user is not found
+//         if (!user) {
+//             return res.status(404).json({ message: "User not found." });
+//         }
+
+//         // Respond with the found user
+//         return res.status(200).json(user);
+//     } catch (error) {
+//         // Handle any errors that occur during the process
+//         console.error("Error in searchUser:", error);
+//         return res.status(500).json({ message: "Internal server error." });
+//     }
+// };
 
 
 
