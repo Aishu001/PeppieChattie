@@ -10,14 +10,8 @@ export async function checkIfEmailExist(req) {
 
 // this is for generate the jwt token 
 export function generateToken(getTheID , res){
-    return jwt.sign({getTheID} , process.env.SECRET_KEY , {
-        expiresIn : '15d'
-    })
-    res.cookie("jwt" , token , {
-        maxAge : 15 * 16 * 24 * 60 * 60, 
-        httpOnly : true , //prevent XSS attacks cross-site scripting attacks|
-       sameSite : "strict" //  CSRF attacks cross-site request forgery attacks
-    })
+    return jwt.sign({getTheID} , process.env.SECRET_KEY )
+  
 }
 
 
