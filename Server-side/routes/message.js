@@ -11,6 +11,6 @@ router.route("/sendMessage").post(authenticateUser,sendingTheMessage);
 
 
 // this is for fetching all message for a specific chat
-router.route("/fetchMessage:chatId").post(authenticateUser,allMessage);
+router.route("/fetchMessage/:chatId").get(authenticateUser,allMessage);
 
 export const messageRouter = router;
