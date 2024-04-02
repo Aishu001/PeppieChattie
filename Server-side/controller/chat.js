@@ -1,6 +1,5 @@
 import { Chat } from "../models/chat.js";
 import User from "../models/user.js";
-
 export const createChat = async(req , res) => {
     const  {userId } = req.body
     if (!userId) {
@@ -11,7 +10,7 @@ export const createChat = async(req , res) => {
 $and: [
     { users: { $elemMatch: { $eq: req. user._id } } },
 { users: { $elemMatch: { $eq: userId } } },
-]}).populate("user" , "-password")
+]}).populate("users" , "-password")
 .populate("latestMessage")
  
 
@@ -36,37 +35,26 @@ try {
 
 }
 }
-
-
 } 
 
 
-export const getChatsParticular = async(req , res) => {
-    try{
-        Chat.find({
-            user : {
-                $elemMatch : {$eq : req.user._id}
-     } })
-     .populate('user','-password')
-     .sort({updatedAt:-1})
-     .then (async (results) => {
-results = await User.populate(results,{
-path: "latestMessage.sender",
-select: "name pic email", 
-});
+export const getChatsParticular = async (req, res) => {
+    try {
+        const results = await Chat.find({
+            users: { $in: [req.user._id] } // Use $in operator to match documents containing the user ID
+        })
+        .populate('users', '-password')
+        .sort({ updatedAt: -1 });
 
-res. status(200). send(results);
-     })
-    
+        // Populate latestMessage sender details
+        const populatedResults = await User.populate(results, {
+            path: 'latestMessage.sender',
+            select: 'name pic email'
+        });
 
-
-
-
+        res.status(200).send(populatedResults);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: "Internal Server Error" });
     }
-   catch (error) {
-            console.error(error);
-            return res.status(500).json({ error: "Internal Server Error" });
-        }
-    
-    
-}
+};
