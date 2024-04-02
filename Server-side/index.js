@@ -6,6 +6,7 @@ import bodyParser  from 'body-parser';
 import { dataBaseConnection } from './dataBase.js';
 import { userRouter } from './routes/user.js';
 import { chatRouter } from './routes/chat.js';
+import { messageRouter } from './routes/message.js';
 
 //  server set-up
 const app = express()
@@ -22,6 +23,7 @@ app.use(cors());
 //  set-up the various router 
 app.use('/user',userRouter)
 app.use('/chat',chatRouter )
+app.use('/message',messageRouter )
 
 // listen the server
 app.listen(PORT , () => {

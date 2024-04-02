@@ -1,13 +1,16 @@
 import express from 'express';
-import { allMessage, sendMessage } from '../controller/message.js';
+import { allMessage, sendingTheMessage } from '../controller/message.js';
+import authenticateUser from '../middleware/athorzMiddleware.js';
 
 
 
 const router = express.Router()
 
 // this is for sending the message
-router.route("/sendMessage").post(sendMessage);
+router.route("/sendMessage").post(authenticateUser,sendingTheMessage);
 
 
 // this is for fetching all message for a specific chat
-router.route("/fetchMessage:chatId").post(allMessage);
+router.route("/fetchMessage:chatId").post(authenticateUser,allMessage);
+
+export const messageRouter = router;

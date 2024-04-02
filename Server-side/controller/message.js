@@ -2,7 +2,7 @@ import { Message } from "../models/message.js";
 import { Chat } from "../models/chat.js";
 import User from "../models/user.js";
 
-export const sendMessage = async (req , res) => {
+export const sendingTheMessage = async (req , res) => {
     
     const { message ,chatId} = req.body;
     if (!message || !chatId) {
@@ -16,19 +16,19 @@ export const sendMessage = async (req , res) => {
         chat: chatId
     }
     try{
-        const message = await Message.create(newMessage)
+        const createMessage = await Message.create(newMessage)
 
-        message = await message.populate('sender', 'name pic')
-        message = await User.populate(message, {
+       let populateMessage = await  createMessage.populate('sender', ' fullName profileImageUrl')
+        populateMessage = await User.populate( populateMessage, {
             path: "chat.users",
-            select: "name pic email",
+            select: " fullName profileImageUrl email",
             });
             
             await Chat.findByIdAndUpdate(req.body.chatId , {
-                latestMessage : message
+                latestMessage : populateMessage
             })
 
-            res.json(message);
+            res.json(populateMessage);
 
     }
     catch(error){
