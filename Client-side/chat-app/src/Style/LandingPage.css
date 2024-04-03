@@ -1,0 +1,40 @@
+/* styles.css */
+.company-img {
+    width: 80%; /* Adjust the width as needed */
+    height: auto;
+    padding-left: 40px;
+   
+    /* Center the image horizontally */
+  }
+  /* styles.css */
+.card-img1 {
+    width: 60%; /* Adjust the width as needed */
+    height: auto;
+    margin-right: 30px; 
+   margin-left: 40px;
+   border: none;
+    /* Center the image horizontally */
+  }
+  .text-img1{
+    /* margin-bottom: 200px; */
+    margin-bottom: 50px;
+   
+  }
+  
+
+  
+
+  .landing-img {
+    width: 90%; /* Adjust the width as needed */
+    height: auto;
+    margin-right: 100px;
+  /* Center the image horizontally */
+  }
+  /* styles.css */
+.center-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+  }
+  
