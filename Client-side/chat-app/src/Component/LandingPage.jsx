@@ -6,6 +6,8 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import '../Style/LandingPage.css'; // Corrected import statement
+import { useNavigate , Link } from 'react-router-dom';
+
 
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -35,9 +37,9 @@ function LandingPage() {
             Lizards are a widespread group of squamate reptiles, with over 6,000
             species, ranging across all continents except Antarctica
             <br />
-            <Button size="small" color="primary">
-          Get Start
-        </Button>
+            <Link to='/signup'> <Button size="small" color="primary">
+         Get Start
+        </Button></Link> 
           </Typography>
           </div>
           

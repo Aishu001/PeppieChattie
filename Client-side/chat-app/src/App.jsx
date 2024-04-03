@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import LandingPage from './Component/LandingPage'
 import { BrowserRouter as Router, Route, Routes  } from "react-router-dom"
+import SignUp from './Component/SignUp'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -14,7 +15,7 @@ function App() {
    <Router>
      <Routes>
      <Route path="/" element={<LandingPage/>} />
-              <Route path ="/signup" exact Component={SignIn} ></Route>
+              <Route path ="/signup" exact Component={SignUp} ></Route>
               {/* <Route path ="/login" exact Component={Login} ></Route>   
               <Route path ="/dashboard" exact Component={Dashboard} ></Route>    
               <Route path ="/contact" exact Component={Contact} ></Route>  
