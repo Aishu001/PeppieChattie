@@ -5,9 +5,11 @@ import './App.css'
 import LandingPage from './Component/LandingPage'
 import { BrowserRouter as Router, Route, Routes  } from "react-router-dom"
 import SignUp from './Component/SignUp'
+import Login from './Component/Login'
+import ChatPage from './Component/ChatPage'
 
 function App() {
-  const [count, setCount] = useState(0)
+  
 
   return (
     <>
@@ -16,8 +18,10 @@ function App() {
      <Routes>
      <Route path="/" element={<LandingPage/>} />
               <Route path ="/signup" exact Component={SignUp} ></Route>
-              {/* <Route path ="/login" exact Component={Login} ></Route>   
-              <Route path ="/dashboard" exact Component={Dashboard} ></Route>    
+             <Route path ="/login" exact Component={Login} ></Route> 
+             <Route path ="/chatPage" exact Component={ChatPage} ></Route> 
+              {    /*
+                 
               <Route path ="/contact" exact Component={Contact} ></Route>  
               <Route path ="/AddContact" exact Component={AddContact} ></Route>    
               <Route path ="/UpdateContact/:id" exact Component={EditContact} ></Route> 

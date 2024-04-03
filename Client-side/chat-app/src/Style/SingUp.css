@@ -1,0 +1,28 @@
+/* styles.css */
+.container {
+    display: flex;
+    /* border: 5px solid black; */
+    margin-top: 50px;
+    margin-left: 60px;
+  }
+  
+  .image-container {
+    flex: 1;
+    padding: 5px;
+  }
+  
+  .form-container {
+    flex: 2;
+    padding: 160px;
+    margin-right: 200px;
+   
+  }
+  
+  .image{
+   
+    padding: 0px;
+   
+   
+  
+  
+  }
