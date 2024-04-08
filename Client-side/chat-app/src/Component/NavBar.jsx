@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Menu, Input, Dropdown, Avatar, Typography } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import axios from 'axios';
+import '../Style/NavBar.css'
 
 // Function to handle menu item click
 const handleClick = (e) => {
@@ -82,6 +83,10 @@ const handleSearch = async (value) => {
             onSearch={(value) => handleSearch(value)}
           />
         </Menu.Item>
+        <br />
+        <br />
+
+
 
         {/* Dropdown menu */}
         <Menu.Item key="dropdown" style={{ marginRight: '20px', marginTop: '20px' }}>
@@ -95,10 +100,10 @@ const handleSearch = async (value) => {
       </Menu>
 
       {/* Display search results */}
-      <div>
+      <div className="search-results">
   {Array.isArray(searchResults) ? (
     searchResults.map(result => (
-      <div key={result._id} onClick={() => handleSelect(result)}>
+      <div key={result._id} className="search-results-item" onClick={() => handleSelect(result)}>
         <Avatar src={result.profileImageUrl} />
         <span>{result.fullName}</span>
       </div>
@@ -107,7 +112,9 @@ const handleSearch = async (value) => {
     <div>No search results found</div>
   )}
 </div>
+
     </div>
+    
   );
 }
 
