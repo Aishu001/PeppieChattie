@@ -3,9 +3,10 @@ import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
-import Header from './Header';
+// import Header from './Header';
 import Sider from 'antd/es/layout/Sider';
 import SiderBar from './SiderBar';
+import NavBar from './NavBar';
 
 
 
@@ -21,11 +22,11 @@ function ChatPage() {
   return (
    
 <>
-<Header/>
+<NavBar/>
 <Grid container spacing={2}>
 
   <Grid item xs={4}>
-    <SiderBar/>
+   
   </Grid>
   <Grid item xs={8}>
     <Item>xs=8</Item>

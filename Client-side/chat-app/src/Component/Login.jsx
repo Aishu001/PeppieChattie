@@ -16,6 +16,11 @@ function Login() {
       .then(response => {
         // Handle success
         console.log('Login successful:', response.data);
+        const token = response.data.token;
+  // Store token in local storage
+  localStorage.setItem('accessToken', token);
+  // Redirect or perform other actions
+  navigate('/chatPage');
         // Redirect to another page or perform any necessary actions
         navigate('/chatPage');
       })
