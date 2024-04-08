@@ -7,6 +7,7 @@ import Grid from '@mui/material/Grid';
 import Sider from 'antd/es/layout/Sider';
 import SiderBar from './SiderBar';
 import NavBar from './NavBar';
+import Chat from './Chat';
 
 
 
@@ -29,7 +30,7 @@ function ChatPage() {
    <SiderBar/>
   </Grid>
   <Grid item xs={8}>
-    <Item>xs=8</Item>
+   <Chat/>
   </Grid>
 </Grid>
 </>
