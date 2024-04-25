@@ -10,9 +10,11 @@ function ChatBox() {
   return (
    <>
    <div className='box-container'>
-    
+
     <div className='box-message-container '>
-    <h1 className="text-center"></h1>
+  <p>
+    
+  </p>
     </div>  
       
     <div className='box-typing-container '>
