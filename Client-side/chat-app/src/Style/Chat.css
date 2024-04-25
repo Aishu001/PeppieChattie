@@ -1,11 +1,9 @@
-/* Chat.css */
 
-/* Container styles */
 .containerr {
     display: flex; /* Use flexbox to arrange items */
     flex-direction: column; /* Arrange items vertically */
-   /* Center items horizontally */
-    /* Adjust the margin as needed */
+    height: 820px;
+  
   }
   
   /* Chatbar styles */
@@ -59,3 +57,24 @@
     max-height: 100%;
   }
   
+  /* BOX - CONTAINER */
+
+  .box-container {
+        display: flex;
+        flex-direction: column; /* Arrange items vertically */
+    border-top: 2px solid black;
+    margin-top: 10px;
+    height: 820px;
+    background-color: aliceblue;
+  }
+
+  .box-message-container{
+    border: 5px solid black;
+    margin-top: 10px;
+    width: 97%;
+    height: 680px;
+    margin: 10px;
+    background-color: rgb(64, 166, 255);
+    border-radius: 10px;
+
+  }

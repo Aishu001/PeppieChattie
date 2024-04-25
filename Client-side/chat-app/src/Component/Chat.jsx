@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import '../Style/Chat.css';
 import axios from 'axios';
+import ChatBox from './ChatBox';
 
 function Chat({ userID }) {
   const [fullName, setFullName] = useState('');
@@ -53,6 +54,7 @@ function Chat({ userID }) {
               <img src={profileImageUrl} alt="Profile" />
             </div>
             <div>
+              <ChatBox/>
               {/* Additional content for the chat container */}
             </div>
           </div>
