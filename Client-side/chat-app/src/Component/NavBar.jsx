@@ -3,6 +3,9 @@ import { Menu, Input, Dropdown, Avatar, Typography } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import '../Style/NavBar.css'
+import { useNavigate } from 'react-router-dom';
+
+
 
 // Function to handle menu item click
 const handleClick = (e) => {
@@ -21,9 +24,13 @@ const menu = (
 function NavBar() {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const [selectedUserId, setSelectedUserId] = useState(null); 
+  const navigate = useNavigate()
+  
+
+
 
   // Function to handle search
- // Function to handle search
 const handleSearch = async (value) => {
     try {
       // Add your authentication token to the request headers
@@ -61,10 +68,13 @@ const handleSearch = async (value) => {
   };
 
   // Function to handle user selection from dropdown
-  const handleSelect = (value) => {
-    console.log('Selected user:', value);
-    // Do something with the selected user, like navigating to their profile
-  };
+const handleSelect = (user) => {
+ navigate(`/chatPageD/${user._id}`)
+  setSelectedUserId(user._id); // Corrected: Use setCreateChat instead of createChat
+
+
+};
+
 
   return (
     <div>
@@ -83,12 +93,9 @@ const handleSearch = async (value) => {
             onSearch={(value) => handleSearch(value)}
           />
         </Menu.Item>
-        <br />
-        <br />
+      
 
-
-
-        {/* Dropdown menu */}
+        {/* LOGOUT */}
         <Menu.Item key="dropdown" style={{ marginRight: '20px', marginTop: '20px' }}>
           <Dropdown overlay={menu}>
             <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
@@ -113,7 +120,9 @@ const handleSearch = async (value) => {
   )}
 </div>
 
+
     </div>
+
     
   );
 }

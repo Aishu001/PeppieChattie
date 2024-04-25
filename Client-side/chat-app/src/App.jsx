@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route, Routes  } from "react-router-dom"
 import SignUp from './Component/SignUp'
 import Login from './Component/Login'
 import ChatPage from './Component/ChatPage'
+import ChatPageDup from './Component/ChatPageDup'
 
 function App() {
   
@@ -20,6 +21,7 @@ function App() {
               <Route path ="/signup" exact Component={SignUp} ></Route>
              <Route path ="/login" exact Component={Login} ></Route> 
              <Route path ="/chatPage" exact Component={ChatPage} ></Route> 
+             <Route path ="/chatPageD/:userID" exact Component={ChatPageDup} ></Route> 
               {    /*
                  
               <Route path ="/contact" exact Component={Contact} ></Route>  
