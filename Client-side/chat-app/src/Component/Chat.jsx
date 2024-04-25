@@ -1,9 +1,11 @@
-import React from 'react'
-import '../Style/Chat.css'
+import React, { useState } from 'react';
+import '../Style/Chat.css';
 import axios from 'axios';
 
-
 function Chat({ userID }) {
+  const [fullName, setFullName] = useState('');
+  const [profileImageUrl, setProfileImageUrl] = useState('');
+
   const createChatWithUser = async () => {
     try {
       const authToken = localStorage.getItem('accessToken');
@@ -24,6 +26,15 @@ function Chat({ userID }) {
       );
 
       console.log('Chat created:', response.data);
+      const { users } = response.data; // Extract users array from response
+
+      // Find the other user (the one you are chatting with)
+      const otherUser = users.find(user => user._id === userID);
+
+      // Set the name and image of the other user
+      setFullName(otherUser.fullName);
+      setProfileImageUrl(otherUser.profileImageUrl);
+      
       // Handle success or additional logic here
     } catch (error) {
       console.error('Error creating chat:', error);
@@ -31,21 +42,19 @@ function Chat({ userID }) {
     }
   };
 
-
-  
   return (
- <>
- {/* Conditionally render different containers based on selectedUserId */}
- {userID ? (
+    <>
+      {/* Conditionally render different containers based on selectedUserId */}
+      {userID ? (
         <div className="chatbarr" onClick={createChatWithUser}>
           <div className="containerr">
             <div className="navbar">
-              <span>user.fullName </span>
-              <img src='profileImageUrl' alt="" />
-              </div>
-              <div>
-
-              </div>
+              <span>{fullName}</span>
+              <img src={profileImageUrl} alt="Profile" />
+            </div>
+            <div>
+              {/* Additional content for the chat container */}
+            </div>
           </div>
         </div>
       ) : (
@@ -56,8 +65,8 @@ function Chat({ userID }) {
           </div>
         </div>
       )}
- </>
-  )
+    </>
+  );
 }
 
-export default Chat
+export default Chat;

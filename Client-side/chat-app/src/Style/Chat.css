@@ -1,28 +1,59 @@
-.container {
-    display: grid;
-    place-items: center;
-   margin-top: 200px; /* Adjust the height as needed */
+/* Chat.css */
+
+/* Container styles */
+.containerr {
+    display: flex; /* Use flexbox to arrange items */
+    flex-direction: column; /* Arrange items vertically */
+   /* Center items horizontally */
+    /* Adjust the margin as needed */
   }
   
-  .containerr {
-    display: grid;
-    place-items: center;
-   margin-top: 200px; /* Adjust the height as needed */
-  
-   
+  /* Chatbar styles */
+  .chatbarr {
+    background-color: rgb(255, 250, 250);
+    padding-top: 20px; /* Adjust the padding as needed */
+    padding-bottom: 20px; /* Adjust the padding as needed */
+    border-radius: 10px;
   }
+  
+  /* Navbar styles */
+  .navbar {
+    display: flex; /* Use flexbox to arrange items */
+    align-items: center; /* Center items vertically */
+  }
+  
+  /* Name styles */
+  .navbar span {
+    margin-right: 10px;
+    margin-left: 50px; /* Adjust the margin as needed */
+  }
+  
+  /* Image styles */
+  .navbar img {
+    width: 50px; /* Adjust the width as needed */
+    height: 50px; /* Adjust the height as needed */
+    border-radius: 50%; /* Make the image round */
+    margin-left: 900px;
+  }
+  
+
+  /*    {/* Conditionally render different containers based on selectedUserId  */
+
+
   .chatbar{
     background-color: rgb(255, 250, 250);
     padding-top: 100px;
     padding-bottom:200px;
     border-radius: 10px;
   }
-  .chatbarr{
-    background-color: rgb(255, 250, 250);
-    padding-top: 100px;
-    padding-bottom:200px;
-    border-radius: 10px;
+
+  .container {
+    display: grid;
+    place-items: center;
+   margin-top: 200px; /* Adjust the height as needed */
   }
+  
+
   img {
     max-width: 100%;
     max-height: 100%;
