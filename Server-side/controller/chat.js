@@ -58,3 +58,25 @@ export const getChatsParticular = async (req, res) => {
         return res.status(500).json({ error: "Internal Server Error" });
     }
 };
+
+export const getDetailsCreatedChat = async (req, res) => {
+    try {
+        // Assuming the chatId is provided in the request parameters
+        const { chatId } = req.params;
+        console.log("Requested chatId:", chatId); // Log the requested chatId for debugging
+        if (!chatId) {
+            return res.status(400).send("ChatId not provided");
+        }
+
+        const chatDetails = await Chat.findOne({ _id: chatId }).populate("users", "-password");
+        console.log("Retrieved chat details:", chatDetails); // Log the retrieved chat details for debugging
+        if (!chatDetails) {
+            return res.status(404).send("Chat not found");
+        }
+
+        return res.status(200).send(chatDetails);
+    } catch (error) {
+        console.error("Error fetching chat details:", error);
+        return res.status(500).send("Internal server error");
+    }
+};

@@ -69,8 +69,9 @@ const handleSearch = async (value) => {
 
   // Function to handle user selection from dropdown
 const handleSelect = (user) => {
- navigate(`/chatPageD/${user._id}`)
-  setSelectedUserId(user._id); // Corrected: Use setCreateChat instead of createChat
+  const userId = user._id; // Get the selected user ID
+  setSelectedUserId(userId); // Set the selected user ID in state
+  navigate(`/chatPageD/${userId}`); // Navigate to the chat page with the selected user ID
 
 
 };

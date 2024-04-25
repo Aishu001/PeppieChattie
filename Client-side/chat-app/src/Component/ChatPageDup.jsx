@@ -22,6 +22,7 @@ const Item = styled(Paper)(({ theme }) => ({
 function ChatPageDup() {
 
     const { userId } = useParams();
+    console.log(userId );
   return (
   <>
   <NavBar  />

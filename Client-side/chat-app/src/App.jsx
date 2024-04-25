@@ -21,7 +21,8 @@ function App() {
               <Route path ="/signup" exact Component={SignUp} ></Route>
              <Route path ="/login" exact Component={Login} ></Route> 
              <Route path ="/chatPage" exact Component={ChatPage} ></Route> 
-             <Route path ="/chatPageD/:userID" exact Component={ChatPageDup} ></Route> 
+             <Route path="/chatPageD/:userId" element={<ChatPageDup />} />
+
               {    /*
                  
               <Route path ="/contact" exact Component={Contact} ></Route>  
