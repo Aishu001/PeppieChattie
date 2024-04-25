@@ -1,9 +1,15 @@
 import React from 'react'
+import '../Style/Chat.css'
 
 function Chat() {
   return (
  <>
-<img src='chat.jpeg' alt="Profile"/>
+ <div className="chatbar">
+ <div className="container"> {/* Apply the container class */}
+      <img src="chatttieeee.jpeg" alt="Profile" />
+    </div>
+ </div>
+
  </>
   )
 }
