@@ -5,7 +5,9 @@ import ChatBox from './ChatBox';
 
 function Chat({ userID }) {
   const [fullName, setFullName] = useState('');
+  const [chatId, setChatId] = useState('');
   const [profileImageUrl, setProfileImageUrl] = useState('');
+  
 
   const createChatWithUser = async () => {
     try {
@@ -27,7 +29,7 @@ function Chat({ userID }) {
       );
 
       console.log('Chat created:', response.data);
-      const { users } = response.data; // Extract users array from response
+      const { _id, users } = response.data;  // Extract users array from response
 
       // Find the other user (the one you are chatting with)
       const otherUser = users.find(user => user._id === userID);
@@ -35,6 +37,8 @@ function Chat({ userID }) {
       // Set the name and image of the other user
       setFullName(otherUser.fullName);
       setProfileImageUrl(otherUser.profileImageUrl);
+      setChatId(_id);
+      console.log(chatId);
       
       // Handle success or additional logic here
     } catch (error) {
@@ -54,7 +58,7 @@ function Chat({ userID }) {
               <img src={profileImageUrl} alt="Profile" />
             </div>
             <div>
-              <ChatBox/>
+              <ChatBox chatId={chatId}/>
               {/* Additional content for the chat container */}
             </div>
           </div>
