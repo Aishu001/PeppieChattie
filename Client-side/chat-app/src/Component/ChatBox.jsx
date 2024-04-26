@@ -9,38 +9,55 @@ import SendIcon from '@mui/icons-material/Send';
 
 function ChatBox({chatId}) {
   const [message, setMessage] = useState('');
-  //  const [chatId, setChatId] = useState(chatId); 
+  const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
 
-  console.log(chatId);
-  //  FUNCTIONALITY FOR FETCHING MESSAGES
-  useEffect(() => {
-    fetchChats();
-  }, []);
 
-  const fetchChats = async () => {
-    try {
-      const authToken = localStorage.getItem('accessToken');
-      const response = await axios.get(`http://localhost:3000/message/fetchMessage/${chatId}`, {
-        headers: {
-          Authorization: `Bearer ${authToken}`
-        }
-      });
-      setLoading(false);
-    } catch (error) {
-      console.error('Error fetching chats:', error);
-      setError('Error fetching chats. Please try again later.');
-      setLoading(false);
-    }
-  };
+  useEffect(() => {
+    const fetchMessages = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        // Your API endpoint URL
+        const authToken = localStorage.getItem('accessToken');
+        const apiUrl = `http://localhost:3000/message/fetchMessage/${chatId}`;
+
+        // Send GET request to fetch messages
+        const response = await axios.get(apiUrl, {
+          headers: {
+            Authorization: `Bearer ${authToken}`
+          }
+        });
+
+        // Set the messages state with the response data
+        setMessages(response.data);
+        console.log(response.data);
+
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching messages:', error);
+        setError(error);
+        setLoading(false);
+      }
+    };
+
+    // Call fetchMessages when the component mounts
+    fetchMessages();
+  }, [chatId]);
+
+  // Render loading indicator if messages are loading
   if (loading) {
-    return <div>Loading...</div>;
+    return <div>Loading messages...</div>;
   }
+
+  // Render error message if there was an error fetching messages
   if (error) {
-    return <div>Error: {error}</div>;
+    return <div>Error fetching messages: {error.message}</div>;
   }
+
 
 //  FUNCTIONALITY FOR SENDING MESSAGES
   const sendMessage = async () => {
