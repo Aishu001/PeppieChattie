@@ -54,29 +54,21 @@ export const sendingTheMessage = async (req , res) => {
 
     }
 }
-
-export const allMessage=async(req,res)=>{
-     
+export const allMessage = async (req, res) => {
     try {
-    
-        const message=await Message.find({chat:req.params.chatId})
-        .populate("sender","name pic email")
-        .populate({
-            path: "chat",
-            populate: {
-                path: "users",
-                select: "name pic email " 
-            }
-        });
+        const messages = await Message.find({ chat: req.params.chatId })
+            .populate("sender", "name pic email profileImage") // Add profileImage to populate
+            .populate({
+                path: "chat",
+                populate: {
+                    path: "users",
+                    select: "name pic email profileImage" // Add profileImage to select
+                }
+            });
 
-        return res.status(200).json(message);
-        
+        return res.status(200).json(messages);
     } catch (error) {
         console.error(error);
         return res.status(500).send("Internal Server Error");
-
-        
     }
-
-
 }
