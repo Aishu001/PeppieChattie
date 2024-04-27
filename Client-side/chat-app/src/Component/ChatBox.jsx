@@ -113,8 +113,9 @@ function ChatBox({chatId}) {
   >
     
             <span>{msg.message}</span>
-            <img src={msg.sender.profileImageUrl} alt='Profile' className='profile-image' />
-   
+      <div>
+      <img src={msg.sender.profileImageUrl}  alt='Profile' className='profile-image' />
+      </div>
   </div>
 ))}
 

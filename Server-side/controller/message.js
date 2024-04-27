@@ -57,12 +57,12 @@ export const sendingTheMessage = async (req , res) => {
 export const allMessage = async (req, res) => {
     try {
         const messages = await Message.find({ chat: req.params.chatId })
-            .populate("sender", "name pic email profileImage") // Add profileImage to populate
+            .populate("sender", "email  profileImageUrl") // Add profileImage to populate
             .populate({
                 path: "chat",
                 populate: {
                     path: "users",
-                    select: "name pic email profileImage" // Add profileImage to select
+                    select: "email  profileImageUrl" // Add profileImage to select
                 }
             });
 
