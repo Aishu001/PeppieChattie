@@ -6,6 +6,7 @@ function Sidebar() {
   const [chats, setChats] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  
 
   useEffect(() => {
     fetchChats();
@@ -46,7 +47,7 @@ function Sidebar() {
             <div></div>
             <img src={chat.users[1].profileImageUrl} alt="Profile" className="profile-image" />
             <span>{chat.users[1].fullName}</span>
-            <span>{chat.latestMessage}</span>
+            <span>{chat.latestMessage.message}</span>
           </li>
         ))}
       </ul>

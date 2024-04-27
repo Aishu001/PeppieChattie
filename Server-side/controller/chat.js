@@ -41,23 +41,25 @@ try {
 export const getChatsParticular = async (req, res) => {
     try {
         const results = await Chat.find({
-            users: { $in: [req.user._id] } // Use $in operator to match documents containing the user ID
+            users: { $in: [req.user._id] }
         })
         .populate('users', '-password')
+        .populate({
+            path: 'latestMessage',
+            populate: {
+                path: 'message',
+                options: { sort: { createdAt: -1 }, limit: 1 } // Sort messages by createdAt in descending order and limit to 1
+            }
+        })
         .sort({ updatedAt: -1 });
 
-        // Populate latestMessage sender details
-        const populatedResults = await User.populate(results, {
-            path: 'latestMessage.sender',
-            select: 'name pic email'
-        });
-
-        res.status(200).send(populatedResults);
+        res.status(200).send(results);
     } catch (error) {
         console.error(error);
         return res.status(500).json({ error: "Internal Server Error" });
     }
-};
+}
+
 
 export const getDetailsCreatedChat = async (req, res) => {
     try {

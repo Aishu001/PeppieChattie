@@ -10,7 +10,11 @@ const chatListSchema = new mongoose.Schema({
 latestMessage : {
     type : mongoose.Schema.Types.ObjectId,
     ref:"message",
-}
+},
+message : {
+    type : mongoose.Schema.Types.ObjectId,
+    ref:"message",
+},
 },{
      timestamps: true
 
