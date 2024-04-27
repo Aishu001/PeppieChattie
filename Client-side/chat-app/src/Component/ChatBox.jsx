@@ -95,12 +95,31 @@ function ChatBox({chatId}) {
       // Handle error
     }
   };
+
+
+  
   
   return (
    <>
    <div className='box-container'>
-    <div className='box-message-container '>
-    </div>  
+   <div className='box-message-container'>
+
+   {messages.map((msg, index) => (
+  <div
+    key={index}
+    className={`message ${
+      msg.sender.email.trim() === localStorage.getItem('email')?.trim() ? 'sender' : 'receiver'
+    }`}
+  >
+    
+            <span>{msg.message}</span>
+            <img src={msg.sender.profileImageUrl} alt='Profile' className='profile-image' />
+   
+  </div>
+))}
+
+        </div>
+
       
     <div className='box-typing-container '>
     <Box sx={{  '& > :not(style)': { m: 1, width: '1000px' }, }} >

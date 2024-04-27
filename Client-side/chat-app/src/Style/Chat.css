@@ -78,3 +78,18 @@
     border-radius: 10px;
 
   }
+
+  .sender {
+    text-align: right;
+    background-color: #DCF8C6; /* Adjust to your preference */
+    padding: 10px;
+    margin-bottom: 5px;
+  }
+  
+  .receiver {
+    text-align: left;
+    background-color: #EAEAEA; /* Adjust to your preference */
+    padding: 10px;
+    margin-bottom: 5px;
+  }
+  

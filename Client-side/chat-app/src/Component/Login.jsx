@@ -8,7 +8,6 @@ function Login() {
   const navigate = useNavigate();
 
   const onFinish = (values) => {
-    // Send the form data to the backend for login authentication
     axios.post('http://localhost:3000/user/login', {
       email: values.email,
       password: values.password
@@ -17,10 +16,11 @@ function Login() {
         // Handle success
         console.log('Login successful:', response.data);
         const token = response.data.token;
-  // Store token in local storage
-  localStorage.setItem('accessToken', token);
-  // Redirect or perform other actions
-  navigate('/chatPage');
+    
+        // Store token and email in local storage
+        localStorage.setItem('email', values.email);
+        localStorage.setItem('accessToken', token);
+    
         // Redirect to another page or perform any necessary actions
         navigate('/chatPage');
       })
@@ -29,6 +29,7 @@ function Login() {
         console.error('Error during login:', error);
         // Display error message to the user
       });
+    
   };
 
   return (
