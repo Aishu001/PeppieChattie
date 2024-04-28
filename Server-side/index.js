@@ -34,7 +34,7 @@ app.use('/message', messageRouter);
 // Socket.io logic
 // Socket.io logic
 io.on('connection', (socket) => {
-    console.log('A user connected');
+    // console.log('A user connected');
   
     socket.on('joinChat', (chatId) => {
       socket.join(chatId); // Join the chat room identified by chatId
