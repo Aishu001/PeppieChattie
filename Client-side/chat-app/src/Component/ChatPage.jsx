@@ -3,11 +3,12 @@ import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
-// import Header from './Header';
+
 
 import SiderBar from './SiderBar';
 import NavBar from './NavBar';
 import Chat from './Chat';
+
 
 
 
@@ -20,6 +21,7 @@ const Item = styled(Paper)(({ theme }) => ({
   }));
 
 function ChatPage() {
+
   
   return (
    

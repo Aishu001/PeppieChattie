@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../Style/SideBar.css'
+import { useNavigate } from 'react-router-dom';
 
-function Sidebar() {
+function Sidebar({ onSelectUser }) {
   const [chats, setChats] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  
+  const navigate = useNavigate()
 
   useEffect(() => {
     fetchChats();
@@ -30,6 +31,11 @@ function Sidebar() {
     }
   };
 
+  const handleUserClick = (userId) => {
+    navigate(`/chatPageD/${userId}`); // Navigate to the chat page with the selected user ID
+
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -43,7 +49,7 @@ function Sidebar() {
       <h2>Chat List</h2>
       <ul>
         {chats.map(chat => (
-          <li key={chat._id}>
+          <li key={chat._id} onClick={() => handleUserClick(chat.users[1]._id)}>
             <div></div>
             <img src={chat.users[1].profileImageUrl} alt="Profile" className="profile-image" />
             <span>{chat.users[1].fullName}</span>
