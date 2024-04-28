@@ -76,6 +76,7 @@
     margin: 10px;
     background-color: rgb(64, 166, 255);
     border-radius: 10px;
+    overflow: scroll;
 
   }
 
