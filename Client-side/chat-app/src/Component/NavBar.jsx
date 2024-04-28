@@ -82,7 +82,7 @@ const handleSelect = (user) => {
       <Menu onClick={handleClick} mode="horizontal" style={{ display: 'flex', justifyContent: 'space-between', border: 'none' }}>
         {/* Left side of navbar */}
         <Menu.Item key="logo" style={{ marginRight: 'auto' }}>
-          <img src="logo.png" alt="Logo" style={{ height: '80px', width: 'auto' }} />
+          <img src="http://localhost:5173/logo.png" alt="Logo" style={{ height: '80px', width: 'auto' }} />
         </Menu.Item>
 
         {/* Search bar */}

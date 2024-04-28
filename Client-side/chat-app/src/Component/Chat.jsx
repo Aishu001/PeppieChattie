@@ -67,7 +67,7 @@ function Chat({ userID }) {
         <div className="chatbar">
           <div className="container">
             {/* Apply the container class */}
-            <img src="chatttieeee.jpeg" alt="Profile" />
+            <img src="http://localhost:5173/chatttieeee.jpeg" alt="Profile" />
           </div>
         </div>
       )}
