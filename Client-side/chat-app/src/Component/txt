@@ -1,3 +1,5 @@
+
+
 import React, { useState, useEffect } from 'react';
 import '../Style/Chat.css';
 import axios from 'axios';
@@ -7,9 +9,9 @@ import Fab from '@mui/material/Fab';
 import SendIcon from '@mui/icons-material/Send';
 import data from '@emoji-mart/data';
 import Picker from '@emoji-mart/react';
-import { io } from 'socket.io-client'; // Import Socket.io client library
+import io from "socket.io-client";
 
-const socket = io('http://localhost:3000'); // Connect to your backend Socket.io
+const ENDPOINT = "http://localhost:5173/";
 
 function ChatBox({ chatId }) {
   const [message, setMessage] = useState('');
@@ -18,19 +20,36 @@ function ChatBox({ chatId }) {
   const [error, setError] = useState(null);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [selectedEmoji, setSelectedEmoji] = useState(null);
- 
+  const [socket, setSocket] = useState(null);
+  const [socketConnected, setSocketConnected] = useState(false);
 
   useEffect(() => {
-    // Listen for new messages from the server
-    socket.on('receiveMessage', (messageData) => {
-      setMessages((prevMessages) => [...prevMessages, messageData]);
-    });
+    const newSocket = io(ENDPOINT);
+    setSocket(newSocket);
 
-    // Cleanup function to remove event listener
     return () => {
-      socket.off('receiveMessage');
+      newSocket.disconnect(); // Disconnect socket on component unmount
     };
   }, []);
+
+ // Inside the useEffect for socket event handling
+useEffect(() => {
+  if (socket) {
+    socket.on("new message", (newMessageReceived) => {
+      if (!chatId || chatId !== newMessageReceived.chat._id) {
+        return;
+      }
+      setMessages(prevMessages => [...prevMessages, newMessageReceived]);
+    });
+  }
+
+  return () => {
+    if (socket) {
+      socket.off("new message");
+    }
+  };
+}, [chatId, socket]);
+
 
   
   useEffect(() => {
@@ -48,6 +67,7 @@ function ChatBox({ chatId }) {
         });
         setMessages(response.data);
         setLoading(false);
+        socket.emit("join chat", chatId);
       } catch (error) {
         console.error('Error fetching messages:', error);
         setError(error);
@@ -56,7 +76,7 @@ function ChatBox({ chatId }) {
     };
 
     fetchMessages();
-  }, [chatId]);
+  }, [chatId, socket]);
 
 const sendMessage = async () => {
   try {
@@ -65,6 +85,10 @@ const sendMessage = async () => {
       return;
     }
 
+    if (!socket) {
+      console.error('Socket is not initialized');
+      return;
+    }
 
     const messageToSend = selectedEmoji ? message + selectedEmoji.native : message;
     const authToken = localStorage.getItem('accessToken');
@@ -78,8 +102,8 @@ const sendMessage = async () => {
         Authorization: `Bearer ${authToken}`
       }
     });
+    socket.emit("new message", response.data); 
     console.log('Message sent successfully:', response.data);
-    socket.emit('sendMessage', requestData);
     setMessage('');
     setSelectedEmoji(null);
   } catch (error) {
@@ -92,25 +116,21 @@ const sendMessage = async () => {
   return (
     <>
       <div className='box-container'>
-      <div className='box-message-container'>
-    {messages.map((msg, index) => (
-      <div
-        key={index}
-        className={`message ${
-          msg.sender?.email?.trim() === localStorage.getItem('email')?.trim() ? 'sender' : 'receiver'
-        }`}
-      >
-        <p>{msg.message}</p>
-        <div>
-          {msg.sender?.profileImageUrl ? (
-            <img src={msg.sender.profileImageUrl} alt='Profile' className='profile-image' />
-          ) : (
-            <div className="default-profile-image">No Profile Image</div>
-          )}
+        <div className='box-message-container'>
+          {messages.map((msg, index) => (
+            <div
+              key={index}
+              className={`message ${
+                msg.sender.email.trim() === localStorage.getItem('email')?.trim() ? 'sender' : 'receiver'
+              }`}
+            >
+              <p>{msg.message}</p>
+              <div>
+                <img src={msg.sender.profileImageUrl} alt='Profile' className='profile-image' />
+              </div>
+            </div>
+          ))}
         </div>
-      </div>
-    ))}
-  </div>
 
         <div className='box-typing-container '>
           <Box sx={{ '& > :not(style)': { m: 1, width: '1000px' } }}>
@@ -150,3 +170,4 @@ const sendMessage = async () => {
 }
 
 export default ChatBox;
+
