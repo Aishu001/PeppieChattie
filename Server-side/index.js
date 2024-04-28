@@ -43,6 +43,14 @@ io.on('connection', (socket) => {
 
   // Handle other events as needed
 });
+// In your Socket.io server code
+
+// Handle typing event from clients
+socket.on('typing', ({ chatId, username }) => {
+    // Emit typing event to all other users in the same chat room
+    socket.broadcast.to(chatId).emit('typing', { chatId, username });
+  });
+  
 
 server.listen(PORT, () => {
   console.log(`Server running on PORT ${PORT}`);
