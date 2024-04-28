@@ -38,10 +38,16 @@ function ChatBox({ chatId }) {
     };
   }, []);
 
+  // Emit 'joinChat' event when the component mounts or when navigating to a different chat
+useEffect(() => {
+  socket.emit('joinChat', chatId);
+}, [chatId]);
+
+
   useEffect(() => {
     socket.on('typing', ({ chatId, username }) => {
       // Check if the typing event is for the current chat
-      if (chatId === currentChatId) {
+      if (chatId === chatId) {
         setIsTyping(true);
         setTypingUser(username);
         // Clear typing indicator after 3 seconds (adjust as needed)
@@ -51,7 +57,7 @@ function ChatBox({ chatId }) {
         }, 3000);
       }
     });
-  }, []);
+  }, [chatId]); // Make sure to include chatId in the dependencies array
   
   
   useEffect(() => {
@@ -109,9 +115,11 @@ function ChatBox({ chatId }) {
 
   const handleTyping = (e) => {
     setMessage(e.target.value);
-    // Set typing status to true if message is not empty
     setIsTyping(e.target.value !== '');
+    // Emit a 'typing' event to the server with the correct chatId
+    socket.emit('typing', { chatId, username: localStorage.getItem('email') });
   };
+  
 
   return (
     <>

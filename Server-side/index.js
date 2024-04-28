@@ -32,24 +32,27 @@ app.use('/chat', chatRouter);
 app.use('/message', messageRouter);
 
 // Socket.io logic
-
+// Socket.io logic
 io.on('connection', (socket) => {
-  console.log('A user connected');
-  // Handle events such as message sending
-  socket.on('sendMessage', (messageData) => {
-    // Handle message data and emit it to relevant clients
-    io.emit('receiveMessage', messageData);
+    console.log('A user connected');
+  
+    socket.on('joinChat', (chatId) => {
+      socket.join(chatId); // Join the chat room identified by chatId
+    });
+  
+    // Handle events such as message sending
+    socket.on('sendMessage', (messageData) => {
+      // Handle message data and emit it to relevant clients
+      io.to(messageData.chatId).emit('receiveMessage', messageData);
+    });
+  
+    // Handle typing event from clients
+    socket.on('typing', ({ chatId, username }) => {
+      // Emit typing event to all other users in the same chat room
+      socket.to(chatId).emit('typing', { chatId, username });
+    });
   });
-
-  // Handle other events as needed
-});
-// In your Socket.io server code
-
-// Handle typing event from clients
-socket.on('typing', ({ chatId, username }) => {
-    // Emit typing event to all other users in the same chat room
-    socket.broadcast.to(chatId).emit('typing', { chatId, username });
-  });
+  
   
 
 server.listen(PORT, () => {
