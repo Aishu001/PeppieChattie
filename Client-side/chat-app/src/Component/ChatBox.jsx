@@ -8,6 +8,7 @@ import SendIcon from '@mui/icons-material/Send';
 import data from '@emoji-mart/data';
 import Picker from '@emoji-mart/react';
 import { io } from 'socket.io-client'; // Import Socket.io client library
+import '../Style/ChatBox.css';
 
 const socket = io('http://localhost:3000'); // Connect to your backend Socket.io
 
@@ -29,9 +30,9 @@ function ChatBox({ chatId }) {
       // Set the alignment based on the sent flag
       const alignment = isSent ? 'sender' : 'receiver';
       // Add the message with the alignment to the state
-      setMessages(prevMessages => [...prevMessages, {...messageData, alignment}]);
+      setMessages((prevMessages) => [...prevMessages, { ...messageData, alignment }]);
     });
-  
+
     // Cleanup function to remove event listener
     return () => {
       socket.off('receiveMessage');
@@ -39,10 +40,9 @@ function ChatBox({ chatId }) {
   }, []);
 
   // Emit 'joinChat' event when the component mounts or when navigating to a different chat
-useEffect(() => {
-  socket.emit('joinChat', chatId);
-}, [chatId]);
-
+  useEffect(() => {
+    socket.emit('joinChat', chatId);
+  }, [chatId]);
 
   useEffect(() => {
     socket.on('typing', ({ chatId, username }) => {
@@ -58,8 +58,7 @@ useEffect(() => {
       }
     });
   }, [chatId]); // Make sure to include chatId in the dependencies array
-  
-  
+
   useEffect(() => {
     const fetchMessages = async () => {
       try {
@@ -70,20 +69,21 @@ useEffect(() => {
 
         const response = await axios.get(apiUrl, {
           headers: {
-            Authorization: `Bearer ${authToken}`
-          }
+            Authorization: `Bearer ${authToken}`,
+          },
         });
         setMessages(response.data);
-        setLoading(false);
       } catch (error) {
         console.error('Error fetching messages:', error);
         setError(error);
+      } finally {
         setLoading(false);
       }
     };
 
     fetchMessages();
   }, [chatId]);
+  
 
   const sendMessage = async () => {
     try {
@@ -97,12 +97,12 @@ useEffect(() => {
       const apiUrl = 'http://localhost:3000/message/sendMessage';
       const requestData = {
         message: messageToSend,
-        chatId: chatId
+        chatId: chatId,
       };
       const response = await axios.post(apiUrl, requestData, {
         headers: {
-          Authorization: `Bearer ${authToken}`
-        }
+          Authorization: `Bearer ${authToken}`,
+        },
       });
       console.log('Message sent successfully:', response.data);
       socket.emit('sendMessage', requestData);
@@ -119,63 +119,72 @@ useEffect(() => {
     // Emit a 'typing' event to the server with the correct chatId
     socket.emit('typing', { chatId, username: localStorage.getItem('email') });
   };
-  
 
   return (
-    <>
-      <div className='box-container'>
-        <div className='box-message-container'>
-          {messages.map((msg, index) => (
-            <div
-              key={index}
-              className={`message ${msg.sender?.email === localStorage.getItem('email')?.trim() ? 'sender' : 'receiver'}`}
-            >
-              <p>{msg.message}</p>
-              <div>
-                {msg.sender?.profileImageUrl ? (
-                  <img src={msg.sender.profileImageUrl} alt='Profile' className='profile-image' />
-                ) : (
-                  <div className="default-profile-image">No Profile Image</div>
-                )}
-              </div>
+    <><div className="box-container">
+      
+        {loading ? (
+          <div className="box-message-container-loading">
+            Loading...
+            
             </div>
-          ))}
-          {isTyping && <p>{typingUser} is typing...</p>}
+        ) : (
+          <>
+            <div className="box-message-container">
+              {messages.map((msg, index) => (
+                <div
+                  key={index}
+                  className={`message ${
+                    msg.sender?.email === localStorage.getItem('email')?.trim() ? 'sender' : 'receiver'
+                  }`}
+                >
+                    <p className="profile-msg-chat" >{msg.message}</p>
+                  <div>
+                    {msg.sender?.profileImageUrl ? (
+                      <img src={msg.sender.profileImageUrl} alt="Profile" className="profile-image-chat" />
+                    ) : (
+                      <div className="default-profile-image">No Profile Image</div>
+                    )}
+                  </div>
+                </div>
+              ))}
+              {isTyping && <p>{typingUser} is typing...</p>}
+            </div>
 
-        </div>
+            <div className="box-typing-container ">
+              <Box sx={{ '& > :not(style)': { m: 1, width: '1000px' } }}>
+                {showEmojiPicker && (
+                  <Picker
+                    set="twitter"
+                    onSelect={(emoji) => {
+                      setSelectedEmoji(emoji);
+                      setMessage((prevMessage) => prevMessage + emoji.native);
+                      setShowEmojiPicker(false);
+                    }}
+                  />
+                )}
 
-        <div className='box-typing-container '>
-          <Box sx={{ '& > :not(style)': { m: 1, width: '1000px' } }}>
-            {showEmojiPicker && (
-              <Picker
-                set='twitter'
-                onSelect={(emoji) => {
-                  setSelectedEmoji(emoji);
-                  setMessage(prevMessage => prevMessage + emoji.native);
-                  setShowEmojiPicker(false);
-                }}
-              />
-            )}
-
-            <TextField
-              label="Enter your message"
-              value={message}
-              onChange={handleTyping} // Update message and typing status
-            />
-            <span>
-              <Fab variant='extended' onClick={() => setShowEmojiPicker(!showEmojiPicker)}>
-                Emoji
-              </Fab>
-            </span>
-            <span>
-              <Fab variant="extended" onClick={sendMessage}>
-                Send
-                <SendIcon />
-              </Fab>
-            </span>
-          </Box>
-          {isTyping && <div className="typing-indicator">Typing...</div>}
-        </div>
+                <TextField
+                  label="Enter your message"
+                  value={message}
+                  onChange={handleTyping} // Update message and typing status
+                />
+                <span>
+                  <Fab variant="extended" onClick={() => setShowEmojiPicker(!showEmojiPicker)}>
+                    Emoji
+                  </Fab>
+                </span>
+                <span>
+                  <Fab variant="extended" onClick={sendMessage}>
+                    Send
+                    <SendIcon />
+                  </Fab>
+                </span>
+              </Box>
+              {isTyping && <div className="typing-indicator">Typing...</div>}
+            </div>
+          </>
+        )}
       </div>
     </>
   );

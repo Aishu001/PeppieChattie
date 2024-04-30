@@ -2,28 +2,56 @@
 .containerr {
     display: flex; /* Use flexbox to arrange items */
     flex-direction: column; /* Arrange items vertically */
-    height: 820px;
+    width: 109%;
+    height: 99%;
+    margin-top: 5px; /* Adjust the height as needed */
+    margin-left: -110px;
+    margin-right: 50px;
+    border: 1px solid  #0c3483;
+    border-radius: 10px;
+    
   
   }
   
   /* Chatbar styles */
-  .chatbarr {
-    background-color: rgb(255, 250, 250);
-    padding-top: 20px; /* Adjust the padding as needed */
-    padding-bottom: 20px; /* Adjust the padding as needed */
-    border-radius: 10px;
-  }
+
   
   /* Navbar styles */
   .navbar {
     display: flex; /* Use flexbox to arrange items */
     align-items: center; /* Center items vertically */
+    padding: 5px;
+    -webkit-box-shadow: 4px 25px 27px -7px rgba(248, 248, 248, 0.74);
+-moz-box-shadow: 4px 25px 27px -7px rgba(236, 236, 236, 0.74);
+box-shadow: 4px 25px 27px -7px rgba(238, 238, 238, 0.74);
   }
   
   /* Name styles */
   .navbar span {
     margin-right: 10px;
     margin-left: 50px; /* Adjust the margin as needed */
+    background-image: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%);
+    -webkit-background-clip: text; /* Apply the gradient to the text */
+    background-clip: text;
+    color: transparent; /* Set text color to transparent */
+    font-family: 'Roboto Slab';
+    font-size: 20px;
+   
+    font-weight: 60px;
+  }
+
+  .navbar-span-loading{
+    margin-right: 10px;
+    margin-left: 50px; /* Adjust the margin as needed */
+    background-image: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%);
+    -webkit-background-clip: text; /* Apply the gradient to the text */
+    background-clip: text;
+    color: transparent; /* Set text color to transparent */
+    font-family: 'Roboto Slab';
+    font-size: 20px;
+   
+    font-weight: 60px;
+  
   }
   
   /* Image styles */
@@ -32,65 +60,61 @@
     height: 50px; /* Adjust the height as needed */
     border-radius: 50%; /* Make the image round */
     margin-left: 900px;
+    border: #0c3483 solid 2px;
   }
+
+  .image-span-loading{
+    width: 50px; /* Adjust the width as needed */
+    height: 50px; /* Adjust the height as needed */
+    border-radius: 50%; /* Make the image round */
+    margin-left: 900px;
+    border: #0c3483 solid 2px;
+    background-image: linear-gradient(to top, lightgrey 0%, lightgrey 1%, #e0e0e0 26%, #efefef 48%, #d9d9d9 75%, #bcbcbc 100%);
+    animation: blink 1s infinite; /* Apply blink animation */
+  }
+
+  @keyframes blink {
+    0% {
+      opacity: 1; /* Fully visible */
+    }
+    50% {
+      opacity: 0; /* Invisible */
+    }
+    100% {
+      opacity: 1; /* Fully visible */
+    }
+  }
+    
+  /* BOX - CONTAINER */
+
+
   
 
   /*    {/* Conditionally render different containers based on selectedUserId  */
 
 
-  .chatbar{
-    background-color: rgb(255, 250, 250);
-    padding-top: 100px;
-    padding-bottom:200px;
-    border-radius: 10px;
-  }
 
-  .container {
-    display: grid;
-    place-items: center;
-   margin-top: 200px; /* Adjust the height as needed */
-  }
-  
+    .container {
+      width: 109%;
+      height: 99%;
+      margin-top: 5px; /* Adjust the height as needed */
+      margin-left: -110px;
+      margin-right: 50px;
+      border-radius: 10px;
+      background-image: url('/ChatBox.jpeg');
+      background-size: cover; /* Cover the entire container */
+      animation: myAnim 2s ease 0s 1 normal forwards;
+    }
+    
+    @keyframes myAnim {
+      0% {
+        transform: scale(0.5);
+      }
+    
+      100% {
+        transform: scale(1);
+      }
+    }
+    
 
-  img {
-    max-width: 100%;
-    max-height: 100%;
-  }
-  
-  /* BOX - CONTAINER */
-
-  .box-container {
-        display: flex;
-        flex-direction: column; /* Arrange items vertically */
-    border-top: 2px solid black;
-    margin-top: 10px;
-    height: 820px;
-    background-color: aliceblue;
-  }
-
-  .box-message-container{
-    border: 5px solid black;
-    margin-top: 10px;
-    width: 97%;
-    height: 680px;
-    margin: 10px;
-    background-color: rgb(64, 166, 255);
-    border-radius: 10px;
-    overflow: scroll;
-
-  }
-
-  .sender {
-    text-align: right;
-    background-color: #DCF8C6; /* Adjust to your preference */
-    padding: 10px;
-    margin-bottom: 5px;
-  }
-  
-  .receiver {
-    text-align: left;
-    background-color: #EAEAEA; /* Adjust to your preference */
-    padding: 10px;
-    margin-bottom: 5px;
-  }
   

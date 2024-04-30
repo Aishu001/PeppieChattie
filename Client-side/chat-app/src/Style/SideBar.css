@@ -1,40 +1,165 @@
 .sidebar {
-    width: 498px;
-    height: 800px;
-    background-color: #d16d6d;
-    padding: 50px;
-    border-radius: 10px;
-  }
+  width: 358px;
+  height: 800px;
+  background-image: linear-gradient(to top, #1e3c72 0%, #1e3c72 1%, #2a5298 100%);
+  border: 1px solid #0c3483;
+  padding: 50px;
+  border-radius: 10px;
+  position: relative; /* Add position relative */
+  overflow: scroll;
+}
+.sidebar-navbar:hover{
+  webkit-box-shadow: 2px 23px 15px -2px rgba(0,0,0,0.75);
+-moz-box-shadow: 2px 23px 15px -2px rgba(0,0,0,0.75);
+box-shadow: 2px 23px 15px -2px rgba(0,0,0,0.75);
+}
+
+.sidebar-navbar {
+  color: white;
+  font-size: 30px;
+  font-weight: bolder;
+  background-color: #0c3483;
+  padding: 15px;
+  left: 0;
+  right: 0;
+  position: absolute;
+  top: 0;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  transition: margin-left 0.20s; /* Add transition */
+
+}
+
+.sidebar-navbar .icons {
+  display: flex;
+  margin-left: 300px;
+}
+
+.sidebar-navbar .icons > * {
+  margin-left: 10px;
+}
+
+.hover-icons {
+  display: none; /* Initially hide hover-icons */
+
+}
+
+.sidebar-navbar:hover .hover-icons {
+  display: flex;
+   /* Show hover-icons on hover */
+}
+
+.arrow-icon {
+  cursor: pointer;
+}
+
+.hover-icons > * {
+  margin: 10px; /* Add spacing between hover-icons */
   
-  h2 {
-    font-size: 18px;
-    margin-bottom: 15px;
-  }
-  
+}
+
+
+
+
+/* user list */
   ul {
     list-style-type: none;
     padding: 0;
   }
   
-  li {
-    margin-bottom: 15px;
-    display: flex;
-    align-items: center;
+  .list {
+    margin-bottom: 30px;
+   padding-left: 20px;
+   border-bottom: 2px solid #1b2f54;
+  }
+  .list:hover {
+    margin-bottom: 50px;
+    margin: 10px;
+   border-bottom: 2px solid #8698b8;
+   background-color: #1b2f54;
+   border-radius: 10px;
+   cursor: pointer;
   }
   
   .profile-image {
-    width: 40px;
-    height: 40px;
+    width: 38px;
+    height: 38px;
     border-radius: 50%;
-    margin-right: 10px;
+    margin-right: 5px;
+    border-bottom: 2px solid #ffffff;
   }
   
-  .fullName {
+  .profile-name {
+    background-image: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
+    -webkit-background-clip: text; /* Apply the gradient to the text */
+    background-clip: text;
+    color: transparent; /* Set text color to transparent */
+    font-family: 'Quattrocento';
+    font-size: 24px;
+    margin-left: 5px;
     font-weight: bold;
+   
   }
   
   .latest-message {
-    font-size: 14px;
-    color: #888;
+    font-size: 16px;
+    color: #eeeded;
+    font-family: 'Quattrocento';
+
+    margin-left: 10px;
+    
   }
   
+  .chat-list{
+    margin-top: 50px;
+  
+    height: 700px;
+  }
+
+
+  /* loading */
+
+  .sidebar-loading{
+    width: 358px;
+    height: 800px;
+    
+ border: 2px solid #0c3483 ;
+    padding: 50px;
+    border-radius: 10px;
+    position: relative; /* Add position relative */
+    animation: blink 1s infinite; /* Apply blink animation */
+
+  }
+  .chat-list-loading{
+    margin-top: 50px;
+  
+    height: 600px;
+    background-image: linear-gradient(to top, lightgrey 0%, lightgrey 1%, #e0e0e0 26%, #efefef 48%, #d9d9d9 75%, #bcbcbc 100%);
+    border-radius: 10px;
+  }
+
+  .sidebar-navbar-loading{
+    
+    background-image: linear-gradient(to top, lightgrey 0%, lightgrey 1%, #e0e0e0 26%, #efefef 48%, #d9d9d9 75%, #bcbcbc 100%);
+ margin: 10px;
+  border-radius: 10px;
+  padding: 30px;
+  display: flex;
+  justify-content: space-between;
+  animation: blink 1s infinite; /* Apply blink animation */
+
+  }
+
+
+  @keyframes blink {
+    0% {
+      opacity: 1; /* Fully visible */
+    }
+    50% {
+      opacity: 0; /* Invisible */
+    }
+    100% {
+      opacity: 1; /* Fully visible */
+    }
+  }
