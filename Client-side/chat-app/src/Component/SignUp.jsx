@@ -2,11 +2,18 @@ import React from 'react';
 import { Button, Checkbox, Form, Input, Select } from 'antd';
 import { useNavigate , Link } from 'react-router-dom';
 import '../Style/SingUp.css';
+import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
+
 
 import axios from 'axios';
 const { Option } = Select;
 
 function SignUp() {
+
+const Item = styled(Paper)();
   const navigate = useNavigate()
 
   const onFinish = (values) => {
@@ -34,127 +41,159 @@ function SignUp() {
 
   return (
     <>
-     <div className="container">
-      <div className="image-container">
-        <img src="signUp.jpeg" alt="" className="image" />
-      </div>
-      <div className="form-container">
+
+    
+    
+     
    
+     
+        <Box>
+        <Grid container spacing={0}  className='container'>
+
+  <Grid item xs={6}  >
+  <Item className="form-container"> 
+       
+       <div className="form-container-div">
+       <div className="image-container">
+       <p className='register'>Create an account</p>
+            <img src="signUp.jpeg" alt="" className='image'/>
+        </div>
+        <div className="form-content">
+        <Form onFinish={onFinish}>
     
-    <Form onFinish={onFinish}>
-          <Form.Item
-              name="nickname"
-              label="Nickname"
-              
-              tooltip="What do you want others to call you?"
-              rules={[
-                  {
-                      required: true,
-                      message: 'Please input your nickname!',
-                      whitespace: true,
-                  },
-              ]}
-          >
-              <Input />
-          </Form.Item>
+    <Form.Item
+        name="nickname"
+        label="Nickname"
+        className="form-item"
+       
+        rules={[
+            {
+                required: true,
+                message: 'Please input your nickname!',
+                whitespace: true,
+            },
+        ]}
+    >
+        <Input />
+    </Form.Item>
 
-          <Form.Item
-              name="email"
-              label="E-mail"
-              rules={[
-                  {
-                      type: 'email',
-                      message: 'The input is not valid E-mail!',
-                  },
-                  {
-                      required: true,
-                      message: 'Please input your E-mail!',
-                  },
-              ]}
-          >
-              <Input />
-          </Form.Item>
+    <Form.Item
+        name="email"
+        label="E-mail"
+        className="form-item"
+        rules={[
+            {
+                type: 'email',
+                message: 'The input is not valid E-mail!',
+            },
+            {
+                required: true,
+                message: 'Please input your E-mail!',
+            },
+        ]}
+    >
+        <Input />
+    </Form.Item>
 
-          <Form.Item
-              name="gender"
-              label="Gender"
-              rules={[
-                  {
-                      required: true,
-                      message: 'Please select gender!',
-                  },
-              ]}
-          >
-              <Select placeholder="Select your gender">
-                  <Option value="male">Male</Option>
-                  <Option value="female">Female</Option>
-              </Select>
-          </Form.Item>
+    <Form.Item
+        name="gender"
+        label="Gender"
+        className="genderr-item"
+        rules={[
+            {
+                required: true,
+                message: 'Please select gender!',
+            },
+        ]}
+    >
+      <br />
+        <Select placeholder="Select your gender"   className="option-item">
+            <Option value="male">Male</Option>
+            <Option value="female">Female</Option>
+        </Select>
+    </Form.Item>
 
-          <Form.Item
-              name="password"
-              label="Password"
-              rules={[
-                  {
-                      required: true,
-                      message: 'Please input your password!',
-                  },
-              ]}
-              hasFeedback
-          >
-              <Input.Password />
-          </Form.Item>
+    <Form.Item
+        name="password"
+        label="Password"
+        className="gender-item"
+        rules={[
+            {
+                required: true,
+                message: 'Please input your password!',
+            },
+        ]}
+        hasFeedback
+    >
+        <Input.Password />
+    </Form.Item>
 
-          <Form.Item
-              name="confirm"
-              label="Confirm Password"
-              dependencies={['password']}
-              hasFeedback
-              rules={[
-                  {
-                      required: true,
-                      message: 'Please confirm your password!',
-                  },
-                  ({ getFieldValue }) => ({
-                      validator(_, value) {
-                          if (!value || getFieldValue('password') === value) {
-                              return Promise.resolve();
-                          }
-                          return Promise.reject(new Error('The passwords that you entered do not match!'));
-                      },
-                  }),
-              ]}
-          >
-              <Input.Password />
-          </Form.Item>
+    <Form.Item
+        name="confirm"
+        label="Confirm Password"
+        className="gender-item"
+        dependencies={['password']}
+        hasFeedback
+        rules={[
+            {
+                required: true,
+                message: 'Please confirm your password!',
+            },
+            ({ getFieldValue }) => ({
+                validator(_, value) {
+                    if (!value || getFieldValue('password') === value) {
+                        return Promise.resolve();
+                    }
+                    return Promise.reject(new Error('The passwords that you entered do not match!'));
+                },
+            }),
+        ]}
+    >
+        <Input.Password />
+    </Form.Item>
 
-          <Form.Item
-              name="agreement"
-              valuePropName="checked"
-              rules={[
-                  {
-                      validator: (_, value) => value ? Promise.resolve() : Promise.reject(new Error('Should accept agreement')),
-                  },
-              ]}
-          >
-              <Checkbox>
-                  I have read the <a href="#">agreement</a>
-              </Checkbox>
-          </Form.Item>
-         
-          <Form.Item>
-              <Button type="primary" htmlType="submit">
-                  Register
-              </Button>
-          </Form.Item>
-       <Link to = "/login"><p>Already have a account?  Login </p></Link>   
+    <Form.Item
+        name="agreement"
+        valuePropName="checked"
+        rules={[
+            {
+                validator: (_, value) => value ? Promise.resolve() : Promise.reject(new Error('Should accept agreement')),
+            },
+        ]}
+    >
+        <Checkbox>
+            I have read the <a href="#">agreement</a>
+        </Checkbox>
+    </Form.Item>
+   
+    <Form.Item>
+        <Button type="primary" htmlType="submit">
+            Register
+            <span></span>
+
+        </Button>
+        <p className='terms'>By registering, you agree to peppie's Terms of Service and Privacy Policy.</p>
+    </Form.Item>
+ <Link to = "/login"><p >Already have a account?  Login </p></Link>   
 
 
-         
-      </Form>
+   
+</Form>
+
+        </div>
+ 
+
+ 
+</div>
+        </Item>
+  </Grid>
+
+</Grid>
+       
+ 
+        </Box>
+     
     
-      </div>
-    </div>
       </>
   );
 }

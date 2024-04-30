@@ -2,11 +2,15 @@ import React from 'react';
 import { Button, Form, Input } from 'antd';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
-import '../Style/SingUp.css';
+import '../Style/Login.css';
+import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
 
 function Login() {
   const navigate = useNavigate();
-
+  const Item = styled(Paper)();
   const onFinish = (values) => {
     axios.post('http://localhost:3000/user/login', {
       email: values.email,
@@ -34,16 +38,22 @@ function Login() {
 
   return (
     <>
-      <div className="container">
+    <Box>
+
+    <Grid container spacing={0}  className='container'>
+        <Grid item xs={6}  >
+         <Item className="form-container">
+        <div className="form-container-div">
+
         <div className="image-container">
-          <img src="login.jpeg" alt="" className="image" />
+       <p className='register'>Welcome back!</p>
+            <img src="login.jpeg" alt="" className='image'/>
         </div>
-        <div className="form-container">
-          <h1>Login</h1>
-          <Form onFinish={onFinish}>
+        <div className="form-content">
+        <Form onFinish={onFinish}>
             <Form.Item
               name="email"
-              label="E-mail"
+              label="Email Id"
               rules={[
                 {
                   type: 'email',
@@ -71,17 +81,32 @@ function Login() {
             >
               <Input.Password />
             </Form.Item>
+            <Link to="/signup"><p>Forget Password? </p></Link>
 
             <Form.Item>
+            <br />
+            <br />
               <Button type="primary" htmlType="submit">
                 Login
               </Button>
+             
             </Form.Item>
 
             <Link to="/signup"><p>Don't have an account? Sign up</p></Link>
           </Form>
         </div>
-      </div>
+         
+        </div>
+     
+         </Item>
+      </Grid>
+   
+    </Grid>
+     
+      
+    </Box>
+        
+   
     </>
   );
 }
