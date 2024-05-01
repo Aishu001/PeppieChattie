@@ -9,6 +9,7 @@ import data from '@emoji-mart/data';
 import Picker from '@emoji-mart/react';
 import { io } from 'socket.io-client'; // Import Socket.io client library
 import '../Style/ChatBox.css';
+import { CiFaceSmile } from "react-icons/ci";
 
 const socket = io('http://localhost:3000'); // Connect to your backend Socket.io
 
@@ -138,7 +139,10 @@ function ChatBox({ chatId }) {
                     msg.sender?.email === localStorage.getItem('email')?.trim() ? 'sender' : 'receiver'
                   }`}
                 >
-                    <p className="profile-msg-chat" >{msg.message}</p>
+                  <div>
+                  <p className="profile-msg-chat" >{msg.message}</p>
+                  </div>
+                  
                   <div>
                     {msg.sender?.profileImageUrl ? (
                       <img src={msg.sender.profileImageUrl} alt="Profile" className="profile-image-chat" />
@@ -163,23 +167,28 @@ function ChatBox({ chatId }) {
                     }}
                   />
                 )}
+                  
+                      
+                    <span className='emoji'>
+   
+                  <CiFaceSmile variant="extended" onClick={() => setShowEmojiPicker(!showEmojiPicker)}/>
+                
+                </span>
 
                 <TextField
                   label="Enter your message"
                   value={message}
                   onChange={handleTyping} // Update message and typing status
+                  className='input-box'
                 />
-                <span>
-                  <Fab variant="extended" onClick={() => setShowEmojiPicker(!showEmojiPicker)}>
-                    Emoji
-                  </Fab>
+            <span>
+                 
+                 
+                    <SendIcon variant="extended" onClick={sendMessage}/>
+         
                 </span>
-                <span>
-                  <Fab variant="extended" onClick={sendMessage}>
-                    Send
-                    <SendIcon />
-                  </Fab>
-                </span>
+             
+                    
               </Box>
               {isTyping && <div className="typing-indicator">Typing...</div>}
             </div>
