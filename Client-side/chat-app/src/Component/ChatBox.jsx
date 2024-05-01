@@ -17,7 +17,7 @@ function ChatBox({ chatId }) {
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(false);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [selectedEmoji, setSelectedEmoji] = useState(null);
   const [isTyping, setIsTyping] = useState(false);
@@ -76,7 +76,8 @@ function ChatBox({ chatId }) {
         setMessages(response.data);
       } catch (error) {
         console.error('Error fetching messages:', error);
-        setError(error);
+       
+        setError(true);
       } finally {
         setLoading(false);
       }
@@ -126,72 +127,104 @@ function ChatBox({ chatId }) {
       
         {loading ? (
           <div className="box-message-container-loading">
-            Loading...
+              <div className="box-message-container">
+    <div>
+      <div>
+    
+        <p className="profile-msg-chat-loading-sender"></p>
+        <p className="profile-msg-chat-loading-recevier"></p>
+        <p className="profile-msg-chat-loading-sender"></p>
+        <p className="profile-msg-chat-loading-recevier"></p>
+        <p className="profile-msg-chat-loading-sender"></p>
+        <p className="profile-msg-chat-loading-recevier"></p>
+        <p className="profile-msg-chat-loading-recevier"></p>
+      </div>
+
+       
+   
+    </div>
+
+  {/* Typing indicator */}
+  {isTyping && <p>{typingUser} is typing...</p>}
+</div>
             
             </div>
+        ) : error ? (
+          // Error state
+          <div className="box-message-container-error">
+            {/* Display error message */}
+            <img src="/error.jpeg" alt="" />
+            <p>OOPS! Something Went Wrong <br /> 
+                  Please try again later</p>
+          </div>
         ) : (
           <>
-            <div className="box-message-container">
-              {messages.map((msg, index) => (
-                <div
-                  key={index}
-                  className={`message ${
-                    msg.sender?.email === localStorage.getItem('email')?.trim() ? 'sender' : 'receiver'
-                  }`}
-                >
-                  <div>
-                  <p className="profile-msg-chat" >{msg.message}</p>
-                  </div>
-                  
-                  <div>
-                    {msg.sender?.profileImageUrl ? (
-                      <img src={msg.sender.profileImageUrl} alt="Profile" className="profile-image-chat" />
-                    ) : (
-                      <div className="default-profile-image">No Profile Image</div>
-                    )}
-                  </div>
-                </div>
-              ))}
-              {isTyping && <p>{typingUser} is typing...</p>}
-            </div>
+      <div className="box-message-container">
+  {/* Messages */}
+  {messages.map((msg, index) => (
+    <div
+      key={index}
+      className={`message ${
+        msg.sender?.email === localStorage.getItem('email')?.trim() ? 'sender' : 'receiver'
+      }`}
+    >
+      <div>
+        <p className="profile-msg-chat">{msg.message}</p>
+      </div>
+      <div>
+        {msg.sender?.profileImageUrl ? (
+          <img src={msg.sender.profileImageUrl} alt="Profile" className="profile-image-chat" />
+        ) : (
+          <div className="default-profile-image">No Profile Image</div>
+        )}
+      </div>
+    </div>
+  ))}
+  {/* Typing indicator */}
+  {isTyping && <p>{typingUser} is typing...</p>}
+</div>
 
-            <div className="box-typing-container ">
-              <Box sx={{ '& > :not(style)': { m: 1, width: '1000px' } }}>
-                {showEmojiPicker && (
-                  <Picker
-                    set="twitter"
-                    onSelect={(emoji) => {
-                      setSelectedEmoji(emoji);
-                      setMessage((prevMessage) => prevMessage + emoji.native);
-                      setShowEmojiPicker(false);
-                    }}
-                  />
-                )}
-                  
-                      
-                    <span className='emoji'>
-   
-                  <CiFaceSmile variant="extended" onClick={() => setShowEmojiPicker(!showEmojiPicker)}/>
-                
-                </span>
+{/* Emoji Picker */}
+{showEmojiPicker && (
+  <div className="emoji-picker">
+    <Picker
+      set="twitter"
+      onSelect={(emoji) => {
+        setSelectedEmoji(emoji);
+        setMessage((prevMessage) => prevMessage + emoji.native);
+        setShowEmojiPicker(false);
+      }}
+    />
+  </div>
+)}
 
-                <TextField
-                  label="Enter your message"
-                  value={message}
-                  onChange={handleTyping} // Update message and typing status
-                  className='input-box'
-                />
-            <span>
-                 
-                 
-                    <SendIcon variant="extended" onClick={sendMessage}/>
-         
-                </span>
-             
-                    
-              </Box>
-              {isTyping && <div className="typing-indicator">Typing...</div>}
-            </div>
+{/* Text field and send button */}
+<div className="box-typing-container">
+  <Box sx={{ '& > :not(style)': { m: 1, width: '1000px' } }}>
+    <TextField
+      label="Type your message"
+      value={message}
+      onChange={handleTyping}
+      InputProps={{
+        className: 'input-box',
+        style: {
+          color: '#0c3483',
+          border: '2px solid white',
+        },
+        placeholder: 'Type your message',
+        endAdornment: (
+          <span className='emoji'>
+            <CiFaceSmile variant="extended" onClick={() => setShowEmojiPicker(!showEmojiPicker)} />
+          </span>
+        ),
+      }}
+    />
+    <span className='send'>
+      <SendIcon variant="extended" onClick={sendMessage} />
+    </span>
+  </Box>
+</div>
+
           </>
         )}
       </div>

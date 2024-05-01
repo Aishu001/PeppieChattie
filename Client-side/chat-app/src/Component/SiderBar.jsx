@@ -22,7 +22,7 @@ function Sidebar({ onSelectUser }) {
   const fetchChats = async () => {
     try {
       const authToken = localStorage.getItem('accessToken');
-      const response = await axios.get('http://localhost:3000/chat/fetchChats', {
+      const response = await axios.get('http://localhost:3000/chat/fetchChats', { //////
         headers: {
           Authorization: `Bearer ${authToken}`
         }
@@ -53,7 +53,12 @@ function Sidebar({ onSelectUser }) {
   }
 
   if (error) {
-    return <div>Error: {error}</div>;
+    return <div className="box-message-container-error-sidebar">
+    {/* Display error message */}
+    <img src="/error.jpeg" alt="" />
+    <p>OOPS! Something Went Wrong <br /> 
+          Please try again later</p>
+  </div>;
   }
 
   const handleHover = () => {
