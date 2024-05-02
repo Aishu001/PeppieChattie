@@ -8,6 +8,18 @@ import { Button, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import '../Style/LandingPage.css'; // Corrected import statement
 
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Slide from '@mui/material/Slide';
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
+
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
@@ -17,23 +29,65 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 function LandingPage() {
-  const [isScrolled, setIsScrolled] = useState(false);
 
+  //  State for displaying the modal dialog box
+  const [isScrolled, setIsScrolled] = useState(false);
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
       setIsScrolled(scrollTop > 0);
     };
-
     window.addEventListener('scroll', handleScroll);
-
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
+
+  
+  
+  const [open, setOpen] = React.useState(false);
+  useEffect(() => {
+    // Open the dialog immediately when the component mounts
+    handleClickOpen();
+  }, []);
+  
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  
+  const handleClose = () => {
+    setOpen(false);
+  };
+  
+
   return (
     <>
+    <React.Fragment>
+      <Dialog
+        open={open}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose}
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle>{"Sorry !!! This page is not responsive"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description">
+          
+<p>Dear visitor, please note that this website is not currently optimized for different screen sizes. For the best experience,
+   we recommend adjusting your screen size to 100% or using a device with a larger screen.</p>
+<p> Thank you for your understanding.</p>
+
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>OK</Button>
+        </DialogActions>
+      </Dialog>
+    </React.Fragment>
+
+
       <Header />
       <div className={`landingpage ${isScrolled ? 'scrolled' : ''}`}>
         <Typography className='headingText' sx={{ fontSize: '1.5rem' }}>

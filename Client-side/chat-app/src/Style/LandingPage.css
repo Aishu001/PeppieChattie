@@ -39,6 +39,17 @@
             transform-origin: 0% 0%;
   }
 }
+.alert {
+  position: fixed;
+  top: 10;
+  left: 0;
+  width: 100%;
+  background-color: #ffcccb;
+  color: #721c24;
+  text-align: center;
+  padding: 10px;
+  z-index: 9999;
+}
 
 
 .headingText h1{
