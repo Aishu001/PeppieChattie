@@ -152,15 +152,7 @@ function ChatBox({ chatId }) {
 </div>
             
             </div>
-        ) : error ? (
-          // Error state
-          <div className="box-message-container-error">
-            {/* Display error message */}
-            <img src="/error.jpeg" alt="" />
-            <p>OOPS! Something Went Wrong <br /> 
-                  Please try again later</p>
-          </div>
-        ) : (
+        ) :  (
           <>
       <div className="box-message-container">
   {/* Messages */}
