@@ -4,12 +4,12 @@ import { Menu } from 'antd';
 
 const items = [
   {
-    label: 'Get Signal',
+    label: 'Help',
     key: 'mail',
     icon: <MailOutlined />,
   },
   {
-    label: 'Help',
+    label: 'Blog',
     key: 'app',
     icon: <AppstoreOutlined />,
   },
@@ -50,8 +50,8 @@ const items = [
   },
   {
     label: (
-      <a href="https://ant.design" target="_blank" rel="noopener noreferrer">
-        Navigation Four - Link
+      <a href="" target="_blank" rel="noopener noreferrer">
+       Donate
       </a>
     ),
     key: 'alipay',
@@ -70,7 +70,7 @@ const Header = () => {
     <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" style={{ display: 'flex', height: '100px', justifyContent: 'space-between' , border: 'none'  }}>
       <Menu.Item key="logo">
         {/* Place your logo image here */}
-        <img src="logo.png" alt="Logo" style={{ height: '100px', width: 'auto' , marginRight: "800px" }} />
+        <img src="logo.png" alt="Logo" style={{ height: '100px', width: 'auto' , marginRight: "800px" ,userSelect: 'none'  }} />
       </Menu.Item>
       <Menu.ItemGroup key="menu" style={{ float: 'right' , fontSize:'18px' , fontWeight:'bold' }}>
         {items.map((item) => (

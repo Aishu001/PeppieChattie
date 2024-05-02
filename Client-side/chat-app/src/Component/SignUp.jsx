@@ -12,12 +12,13 @@ import axios from 'axios';
 const { Option } = Select;
 
 function SignUp() {
-
+ 
 const Item = styled(Paper)();
   const navigate = useNavigate()
 
   const onFinish = (values) => {
     // Send the form data to the backend
+    setLoading(true); 
     axios.post('http://localhost:3000/user/signup', {
       fullName: values.nickname,
       email: values.email,
@@ -36,7 +37,7 @@ const Item = styled(Paper)();
         // Handle error
         console.error('Error submitting data:', error);
         // Display error message to the user
-      });
+      })
   };
 
   return (
