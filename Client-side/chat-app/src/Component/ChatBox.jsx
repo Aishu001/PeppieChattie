@@ -64,7 +64,7 @@ function ChatBox({ chatId }) {
     const fetchMessages = async () => {
       try {
         setLoading(true);
-        setError(null);
+        
         const authToken = localStorage.getItem('accessToken');
         const apiUrl = `https://peppie-chat.onrender.com/fetchMessage/${chatId}`;
 
