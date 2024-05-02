@@ -11,7 +11,7 @@ import { io } from 'socket.io-client'; // Import Socket.io client library
 import '../Style/ChatBox.css';
 import { CiFaceSmile } from "react-icons/ci";
 
-const socket = io('http://localhost:3000'); // Connect to your backend Socket.io
+const socket = io('https://peppie-chat.onrender.com'); // Connect to your backend Socket.io
 
 function ChatBox({ chatId }) {
   const [message, setMessage] = useState('');
@@ -66,7 +66,7 @@ function ChatBox({ chatId }) {
         setLoading(true);
         setError(null);
         const authToken = localStorage.getItem('accessToken');
-        const apiUrl = `http://localhost:3000/message/fetchMessage/${chatId}`;
+        const apiUrl = `https://peppie-chat.onrender.com/fetchMessage/${chatId}`;
 
         const response = await axios.get(apiUrl, {
           headers: {
@@ -96,7 +96,7 @@ function ChatBox({ chatId }) {
 
       const messageToSend = selectedEmoji ? message + selectedEmoji.native : message;
       const authToken = localStorage.getItem('accessToken');
-      const apiUrl = 'http://localhost:3000/message/sendMessage';
+      const apiUrl = 'https://peppie-chat.onrender.com/message/sendMessage';
       const requestData = {
         message: messageToSend,
         chatId: chatId,

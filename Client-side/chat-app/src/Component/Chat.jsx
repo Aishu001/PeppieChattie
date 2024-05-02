@@ -27,7 +27,7 @@ function Chat({ userID }) {
       }
 
       const response = await axios.post(
-        'http://localhost:3000/chat/createChat',
+        'https://peppie-chat.onrender.com/chat/createChat',
         { userId: userID },
         {
           headers: {

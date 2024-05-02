@@ -33,7 +33,7 @@ const menu = (
       // Add your authentication token to the request headers
       const authToken = localStorage.getItem('accessToken');
       // Replace 'your-authentication-token' with your actual token
-      const response = await axios.get(`http://localhost:3000/user/search?search=${value}`, {
+      const response = await axios.get(`https://peppie-chat.onrender.com/user/search?search=${value}`, {
         headers: {
           Authorization: `Bearer ${authToken}`,
         },

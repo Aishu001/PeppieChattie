@@ -21,7 +21,7 @@ const Sidebar = () => {
   const fetchChats = async () => {
     try {
       const authToken = localStorage.getItem('accessToken');
-      const response = await axios.get('http://localhost:3000/chat/fetchChats', {
+      const response = await axios.get('https://peppie-chat.onrender.com/chat/fetchChats', {
         headers: {
           Authorization: `Bearer ${authToken}`,
         },

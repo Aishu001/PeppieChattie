@@ -19,7 +19,7 @@ const Item = styled(Paper)();
   const onFinish = (values) => {
     // Send the form data to the backend
    
-    axios.post('http://localhost:3000/user/signup', {
+    axios.post('https://peppie-chat.onrender.com/user/signup', {
       fullName: values.nickname,
       email: values.email,
       gender: values.gender,

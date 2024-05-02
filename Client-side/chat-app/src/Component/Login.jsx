@@ -12,7 +12,7 @@ function Login() {
   const navigate = useNavigate();
   const Item = styled(Paper)();
   const onFinish = (values) => {
-    axios.post('http://localhost:3000/user/login', {
+    axios.post('https://peppie-chat.onrender.com/user/login', {
       email: values.email,
       password: values.password
     })
