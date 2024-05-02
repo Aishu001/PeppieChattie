@@ -24,6 +24,7 @@ function Login() {
         // Store token and email in local storage
         localStorage.setItem('email', values.email);
         localStorage.setItem('accessToken', token);
+        localStorage.setItem('userId', response.data.userId); // Store the user ID
     
         // Redirect to another page or perform any necessary actions
         navigate('/chatPage');

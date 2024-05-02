@@ -110,6 +110,9 @@ function ChatBox({ chatId }) {
       socket.emit('sendMessage', requestData);
       setMessage('');
       setSelectedEmoji(null);
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000);
     } catch (error) {
       console.error('Error sending message:', error);
     }

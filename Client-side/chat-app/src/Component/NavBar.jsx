@@ -28,21 +28,7 @@ const menu = (
   const [selectedUserId, setSelectedUserId] = useState(null); 
   const navigate = useNavigate()
   
-
-  const handleLogout = () => {
-    try {
-      // Clear the authentication token from local storage
-      localStorage.removeItem('accessToken');
-      // Navigate to the home page
-      navigate('/');
-      console.log('Logged out');
-    } catch (error) {
-      console.error('Error logging out:', error);
-    }
-
-
-  // Function to handle search
-const handleSearch = async (value) => {
+  const handleSearch = async (value) => {
     try {
       // Add your authentication token to the request headers
       const authToken = localStorage.getItem('accessToken');
@@ -68,8 +54,15 @@ const handleSearch = async (value) => {
       console.error('Error searching:', error);
       setSearchResults([]);
     }
+    
   };
+  const handleSelect = (user) => {
+    const userId = user._id; // Get the selected user ID
+    setSelectedUserId(userId); // Set the selected user ID in state
+    navigate(`/chatPageD/${userId}`); // Navigate to the chat page with the selected user ID
   
+  
+  };
 
   // Function to handle input change
   const handleChange = (value) => {
@@ -77,15 +70,23 @@ const handleSearch = async (value) => {
     // Trigger search when input changes
     handleSearch(value);
   };
+  const handleLogout = () => {
+    try {
+      // Clear the authentication token from local storage
+      localStorage.removeItem('accessToken');
+      // Navigate to the home page
+      navigate('/');
+      console.log('Logged out');
+    } catch (error) {
+      console.error('Error logging out:', error);
+    }
+
+
+  // Function to handle search
+
 
   // Function to handle user selection from dropdown
-const handleSelect = (user) => {
-  const userId = user._id; // Get the selected user ID
-  setSelectedUserId(userId); // Set the selected user ID in state
-  navigate(`/chatPageD/${userId}`); // Navigate to the chat page with the selected user ID
 
-
-};
 
 };
 
