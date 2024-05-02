@@ -12,22 +12,33 @@ const handleClick = (e) => {
   console.log('Clicked on item:', e.key);
 };
 
-// Dropdown menu content
+
+
+function NavBar() {
+  // Dropdown menu content
 const menu = (
   <Menu>
-    <Menu.Item key="1">
+   <Menu.Item key="1" onClick={() => handleLogout()}>
       Logout
     </Menu.Item>
   </Menu>
 );
-
-function NavBar() {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [selectedUserId, setSelectedUserId] = useState(null); 
   const navigate = useNavigate()
   
 
+  const handleLogout = () => {
+    try {
+      // Clear the authentication token from local storage
+      localStorage.removeItem('accessToken');
+      // Navigate to the home page
+      navigate('/');
+      console.log('Logged out');
+    } catch (error) {
+      console.error('Error logging out:', error);
+    }
 
 
   // Function to handle search
@@ -76,6 +87,7 @@ const handleSelect = (user) => {
 
 };
 
+};
 
   return (
     <div>
@@ -97,8 +109,8 @@ const handleSelect = (user) => {
       
 
         {/* LOGOUT */}
-        <Menu.Item key="dropdown" style={{ marginRight: '20px', marginTop: '20px' }}>
-          <Dropdown overlay={menu}>
+        <Menu.Item key="dropdown" style={{ marginRight: '20px', marginTop: '20px' }} >
+          <Dropdown overlay={menu} >
             <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
               <Avatar src="https://avatar.iran.liara.run/public/boy?username=female" />
               <DownOutlined />

@@ -54,16 +54,18 @@ function Chat({ userID }) {
       // Handle error here
     }
     if (loading) {
-      return <div>error</div>
+      return <div className="chatbarr">
+      <div className="containerr">
+        <div className="navbar">
+        <span className="navbar-span-loading">Loding...</span>
+              <img src={profileImageUrl} alt="Profile"  className="image-span-loading"/>
+        </div>
+      </div>
+    </div>
     }
   
     if (error) {
-      return  <div className="box-message-container-error">
-      {/* Display error message */}
-      <img src="/error.jpeg" alt="" />
-      <p>OOPS! Something Went Wrong <br /> 
-            Please try again later</p>
-    </div>;
+      return <div>Error: {error}</div>;
     }
   
   };
@@ -85,7 +87,7 @@ function Chat({ userID }) {
           </div>
         </div>
       ) : (
-        <div className="container">
+        <div className="containerd-chat-select-dummy">
           {/* Apply the container class */}
           {/* Additional content for the container when no user is selected */}
         </div>

@@ -48,17 +48,17 @@ const Item = styled(Paper)();
    
      
         <Box>
-        <Grid container spacing={0}  className='container'>
+        <Grid container spacing={0}  className='containerX'>
 
   <Grid item xs={6}  >
-  <Item className="form-container"> 
+  <Item className="form-containerF"> 
        
-       <div className="form-container-div">
-       <div className="image-container">
+       <div className="form-container-divVC">
+       <div className="image-container-fomrs">
        <p className='register'>Create an account</p>
-            <img src="signUp.jpeg" alt="" className='image'/>
+            <img src="signUp.jpeg" alt="" className='imageSC'/>
         </div>
-        <div className="form-content">
+        <div className="form-contentD">
         <Form onFinish={onFinish}>
     
     <Form.Item

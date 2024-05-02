@@ -67,10 +67,10 @@ const Header = () => {
   };
 
   return (
-    <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" style={{ display: 'flex', justifyContent: 'space-between' , border: 'none'  }}>
+    <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" style={{ display: 'flex', height: '100px', justifyContent: 'space-between' , border: 'none'  }}>
       <Menu.Item key="logo">
         {/* Place your logo image here */}
-        <img src="logo.png" alt="Logo" style={{ height: '130px', width: 'auto' , marginRight: "800px" }} />
+        <img src="logo.png" alt="Logo" style={{ height: '100px', width: 'auto' , marginRight: "800px" }} />
       </Menu.Item>
       <Menu.ItemGroup key="menu" style={{ float: 'right' , fontSize:'18px' , fontWeight:'bold' }}>
         {items.map((item) => (

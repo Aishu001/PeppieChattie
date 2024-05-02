@@ -1,26 +1,45 @@
 
-.container{
+.containerX{
  align-content: center;
- margin-left: 300px;
- margin-bottom: 100px;
- 
-
- 
-
-}
-
-.terms{
-  color: rgb(163, 163, 163);
-}
-.form-container{
-  
-  height: 100%;
- width: 150%;
-
  border: #667eea 2px solid;
+ padding: 10%;
 
 }
+.form-containerF{
+  height: 90%;
+ width: 100%;
+ border: #667eea 2px solid;
+ padding: 10px;
+ margin-left: 400px;
+ margin-top: 70px;
+ 
+}
 
+
+.form-container-divVC {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+.image-container-fomrs{
+  flex: 1;
+  padding-right: 20px; /* Adjust spacing between image and form */
+ 
+  background-size: cover; /* Adjust background image size */
+  background-position: center; /* Center the background image */
+  height: 100%;
+}
+
+.imageSC{
+  width: 100%;
+  height: 100%;
+}
+.form-contentD {
+  flex: 2;
+  margin: 10px;
+
+}
 .register {
   background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   -webkit-background-clip: text; /* Apply the gradient to the text */
@@ -36,38 +55,26 @@
 
 
 
-.form-container-div {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
-.image-container {
-  flex: 1;
-  padding-right: 20px; /* Adjust spacing between image and form */
+
+
+
+
+
+
  
-  background-size: cover; /* Adjust background image size */
-  background-position: center; /* Center the background image */
-  height: 100%;
+.terms{
+  color: rgb(163, 163, 163);
 }
 
-.form-content {
-  flex: 2;
-}
-.image{
-  width: 600%;
-}
-/* Your existing styles for form fields and labels go here */
 
 
 
-
-
-.form-container-div{
+/* .form-container-div{
   padding: 50px;
   border-left: 2px solid #3fcd73;
  
-}
+} */
 
  .ant-form-item-label {
   

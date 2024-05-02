@@ -219,9 +219,15 @@ function ChatBox({ chatId }) {
         ),
       }}
     />
-    <span className='send'>
-      <SendIcon variant="extended" onClick={sendMessage} />
-    </span>
+   <span className='send' onClick={sendMessage}>
+  {loading ? (
+    <span>Loading...</span>
+  ) : (
+
+    <SendIcon variant="extended"  />
+  )}
+</span>
+
   </Box>
 </div>
 

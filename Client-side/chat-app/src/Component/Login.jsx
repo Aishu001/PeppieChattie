@@ -40,20 +40,20 @@ function Login() {
     <>
     <Box>
 
-    <Grid container spacing={0}  className='container'>
+    <Grid container spacing={0}  className='containerPIG'>
         <Grid item xs={6}  >
-         <Item className="form-container">
-        <div className="form-container-div">
+         <Item className="form-contaiNER">
+        <div className="form-container-DIVV">
 
-        <div className="image-container">
+        <div className="IMMG-container">
        <p className='register'>Welcome back!</p>
-            <img src="login.jpeg" alt="" className='image'/>
+            <img src="login.jpeg" alt="" className='iMMage'/>
         </div>
-        <div className="form-content">
+        <div className="form-contENt">
         <Form onFinish={onFinish}>
             <Form.Item
               name="email"
-              label="Email Id"
+              label="Email ID"
               rules={[
                 {
                   type: 'email',
