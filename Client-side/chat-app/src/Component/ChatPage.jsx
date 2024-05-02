@@ -27,7 +27,7 @@ function ChatPage() {
    
 <>
 <NavBar />
-<Grid container spacing={2}>
+<Grid container >
 
   <Grid item xs={4}>
    <SiderBar/>

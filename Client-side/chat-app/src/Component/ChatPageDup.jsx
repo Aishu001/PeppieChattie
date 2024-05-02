@@ -26,7 +26,7 @@ function ChatPageDup() {
   return (
   <>
   <NavBar  />
-<Grid container spacing={2}>
+<Grid container className='boxxx'>
 
   <Grid item xs={4}>
    <SiderBar/>

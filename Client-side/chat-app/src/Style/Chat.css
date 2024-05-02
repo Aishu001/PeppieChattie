@@ -53,9 +53,11 @@ box-shadow: 4px 25px 27px -7px rgba(238, 238, 238, 0.74);
     font-weight: 60px;
   
   }
+
   
+
   /* Image styles */
-  .navbar img {
+  .navbar img{
     width: 50px; /* Adjust the width as needed */
     height: 50px; /* Adjust the height as needed */
     border-radius: 50%; /* Make the image round */
