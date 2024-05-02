@@ -1,4 +1,3 @@
-// Import Socket.io and create a server instance
 import express from 'express';
 import http from 'http';
 import { Server } from 'socket.io';
@@ -12,30 +11,28 @@ import { messageRouter } from './routes/message.js';
 
 const app = express();
 const server = http.createServer(app); // Create HTTP server
+
 const io = new Server(server, {
   cors: {
-    origin: 'http://localhost:5173',
+    origin:  'https://sparkly-flan-b6600b.netlify.app',
     methods: ['GET', 'POST'],
     credentials: true // allow credentials (cookies, authorization headers, etc.)
   }
-}); // Create Socket.io server
+});
 
 const PORT = process.env.PORT;
 
 dataBaseConnection();
 
+app.use(cors()); // Apply CORS middleware first
 app.use(bodyParser.json());
-app.use(cors()); // This line might not be necessary since you're already configuring CORS for Socket.io
 
 app.use('/user', userRouter);
 app.use('/chat', chatRouter);
 app.use('/message', messageRouter);
 
 // Socket.io logic
-// Socket.io logic
 io.on('connection', (socket) => {
-    // console.log('A user connected');
-  
     socket.on('joinChat', (chatId) => {
       socket.join(chatId); // Join the chat room identified by chatId
     });
@@ -53,8 +50,6 @@ io.on('connection', (socket) => {
     });
   });
   
-  
-
 server.listen(PORT, () => {
   console.log(`Server running on PORT ${PORT}`);
 });

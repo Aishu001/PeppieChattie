@@ -2,3 +2,8 @@
 from = "/*"
 to = "/index.html"
 status = 200
+
+[[redirects]]
+  from = "/socket.io/*"
+  to = "https://peppie-chat.onrender.com/:splat"
+  status = 200
