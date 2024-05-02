@@ -17,7 +17,7 @@ function ChatBox({ chatId }) {
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  // const [error, setError] = useState(false);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [selectedEmoji, setSelectedEmoji] = useState(null);
   const [isTyping, setIsTyping] = useState(false);
@@ -77,7 +77,7 @@ function ChatBox({ chatId }) {
       } catch (error) {
         console.error('Error fetching messages:', error);
        
-        setError(true);
+       
       } finally {
         setLoading(false);
       }
