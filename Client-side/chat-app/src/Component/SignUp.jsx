@@ -18,7 +18,7 @@ const Item = styled(Paper)();
 
   const onFinish = (values) => {
     // Send the form data to the backend
-    setLoading(true); 
+   
     axios.post('http://localhost:3000/user/signup', {
       fullName: values.nickname,
       email: values.email,
@@ -95,24 +95,22 @@ const Item = styled(Paper)();
     >
         <Input />
     </Form.Item>
-
     <Form.Item
-        name="gender"
-        label="Gender"
-        className="genderr-item"
-        rules={[
-            {
-                required: true,
-                message: 'Please select gender!',
-            },
-        ]}
-    >
-      <br />
-        <Select placeholder="Select your gender"   className="option-item">
-            <Option value="male">Male</Option>
-            <Option value="female">Female</Option>
-        </Select>
-    </Form.Item>
+    name="gender"
+    label="Gender"
+    rules={[
+        {
+            required: true,
+            message: 'Please select gender!',
+        },
+    ]}
+>
+    <Select placeholder="Select your gender">
+        <Option value="male">Male</Option>
+        <Option value="female">Female</Option>
+    </Select>
+</Form.Item>
+
 
     <Form.Item
         name="password"
