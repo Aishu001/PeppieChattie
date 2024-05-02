@@ -48,17 +48,17 @@ function ChatBox({ chatId }) {
   useEffect(() => {
     socket.on('typing', ({ chatId, username }) => {
       // Check if the typing event is for the current chat
-      if (chatId === chatId) {
+      if (chatId === chatIdFromPayload) {
         setIsTyping(true);
         setTypingUser(username);
-        // Clear typing indicator after 3 seconds (adjust as needed)
+        
         setTimeout(() => {
           setIsTyping(false);
           setTypingUser('');
         }, 3000);
       }
     });
-  }, [chatId]); // Make sure to include chatId in the dependencies array
+  }, [chatId]); 
 
   useEffect(() => {
     const fetchMessages = async () => {
@@ -175,15 +175,17 @@ function ChatBox({ chatId }) {
         {msg.sender?.profileImageUrl ? (
           <img src={msg.sender.profileImageUrl} alt="Profile" className="profile-image-chat" />
         ) : (
-          <div className="default-profile-image">No Profile Image</div>
+          <div className="default-profile-image">oops!kindly reload to view avatar</div>
         )}
+       
       </div>
+     
     </div>
   ))}
   {/* Typing indicator */}
-  {isTyping && <p>{typingUser} is typing...</p>}
+  
 </div>
-
+{isTyping && <p> is typing...</p>}
 {/* Emoji Picker */}
 {showEmojiPicker && (
   <div className="emoji-picker">
