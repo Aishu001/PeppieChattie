@@ -24,7 +24,11 @@ const PORT = process.env.PORT;
 
 dataBaseConnection();
 
-app.use(cors()); // Apply CORS middleware first
+app.use(cors({
+  origin: 'https://sparkly-flan-b6600b.netlify.app',
+  methods: ['GET', 'POST'],
+  credentials: true // If you need to allow credentials
+}));
 app.use(bodyParser.json());
 
 app.use('/user', userRouter);
