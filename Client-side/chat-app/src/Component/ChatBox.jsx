@@ -66,8 +66,8 @@ function ChatBox({ chatId }) {
         setLoading(true);
         
         const authToken = localStorage.getItem('accessToken');
-        const apiUrl = `https://peppie-chat.onrender.com/fetchMessage/${chatId}`;
-
+        const apiUrl = `https://peppie-chat.onrender.com/message/fetchMessage/${chatId}`;
+  
         const response = await axios.get(apiUrl, {
           headers: {
             Authorization: `Bearer ${authToken}`,
@@ -76,15 +76,22 @@ function ChatBox({ chatId }) {
         setMessages(response.data);
       } catch (error) {
         console.error('Error fetching messages:', error);
-       
-       
+        // Handle specific error cases, e.g., 404 Not Found
+        if (error.response && error.response.status === 404) {
+          console.error('Chat not found:', chatId);
+          // Handle the 404 error accordingly, e.g., display a message to the user
+        } else {
+          // Handle other errors
+          console.error('Unknown error occurred:', error);
+        }
       } finally {
         setLoading(false);
       }
     };
-
+  
     fetchMessages();
   }, [chatId]);
+  
   
 
   const sendMessage = async () => {
